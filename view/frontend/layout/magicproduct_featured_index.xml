@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<attribute name="class" value="catalog-category-view"/>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Featured Product</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Featured Product</item>
+                    <item name="label" xsi:type="string">Featured Product</item>
+                </argument>
+            </action>
+        </referenceBlock>
+
+<!--          <referenceContainer name="sidebar.main">
+            <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="catalog.leftnav" before="-" template="layer/view.phtml">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" template="layer/filter.phtml"/>
+            </block>
+        </referenceContainer> -->
+        <referenceContainer name="content">
+            <block class="Magento\Theme\Block\Html\Title" name="page.main.title" template="html/title.phtml"/>
+            <block class="Magento\Catalog\Block\Category\View" name="category.products" template="Magento_Catalog::category/products.phtml">
+                <block class="Magiccart\Magicproduct\Block\Product\ProductList" name="category.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="category.product.addto.compare" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+					<arguments>
+                        <argument name="types" xsi:type="string">featured</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument name="crumbName" xsi:type="string">Featured Product</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

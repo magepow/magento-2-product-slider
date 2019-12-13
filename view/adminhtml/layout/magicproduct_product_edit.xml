@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * Magiccart 
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2016-02-23 18:59:34
+ * @@Modify Date: 2016-03-30 00:07:33
+ * @@Function:
+ */ -->
+ 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Product Tabs</title>
+    </head>
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">Magiccart_Magicproduct::magicproduct</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+        <block class="Magiccart\Magicproduct\Block\Adminhtml\Product\Edit" name="product_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+        <block class="Magiccart\Magicproduct\Block\Adminhtml\Product\Edit\Tabs" name="product_edit_tabs">
+            <block class="Magiccart\Magicproduct\Block\Adminhtml\Product\Edit\Tab\Form" name="product_edit_tab_form"/>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">main_section</argument>
+                <argument name="block" xsi:type="string">product_edit_tab_form</argument>
+            </action>
+            <block class="Magiccart\Magicproduct\Block\Adminhtml\Widget\Edit\Tab\Responsive" name="product_edit_tab_responsive"/>
+        	<action method="addTab">
+                <argument name="name" xsi:type="string">responsive_section</argument>
+                <argument name="block" xsi:type="string">product_edit_tab_responsive</argument>
+            </action>
+            <block class="Magiccart\Magicproduct\Block\Adminhtml\Widget\Edit\Tab\Config" name="product_edit_tab_config"/>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">config_section</argument>
+                <argument name="block" xsi:type="string">product_edit_tab_config</argument>
+            </action>
+        </block>
+        </referenceContainer>
+    </body>
+</page>

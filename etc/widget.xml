@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Magiccart 
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2016-02-23 18:59:34
+ * @@Modify Date: 2016-06-21 23:43:54
+ * @@Function:
+ */ -->
+ 
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+	<widget id="magiccart_product" class="Magiccart\Magicproduct\Block\Widget\Product">
+		<label translate="true">Magicproduct Products Widget</label>
+		<description>Magicproduct Products</description>
+		<parameters>
+			<parameter name="identifier" xsi:type="select" source_model="Magiccart\Magicproduct\Model\Widget\Config\Product" required="true" visible="true" sort_order="0" >
+				<label translate="true">Identifier</label>
+			</parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="product.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                    <option name="custom" value="productcustom.phtml" selected="true">
+                        <label translate="true">Product Custom</label>
+                    </option>
+					<option name="hotdeals" value="magicproduct-countdown.phtml" selected="true">
+                        <label translate="true">Product Countdown</label>
+                    </option>
+                </options>
+            </parameter>
+		</parameters>
+	</widget>
+	<widget id="magiccart_category" class="Magiccart\Magicproduct\Block\Widget\Category">
+		<label translate="true">Magicproduct Categories Widget</label>
+		<description>Magicproduct Categories</description>
+		<parameters>
+			<parameter name="identifier" xsi:type="select" source_model="Magiccart\Magicproduct\Model\Widget\Config\Category" required="true" visible="true" sort_order="5" >
+				<label translate="true">Identifier</label>
+			</parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="category.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+					<option name="category-countdown" value="category-countdown.phtml" selected="true">
+                        <label translate="true">category Countdown</label>
+                    </option>
+                    <option name="custom" value="category-custom.phtml" selected="true">
+                        <label translate="true">Category custom</label>
+                    </option>
+                </options>
+            </parameter>
+		</parameters>
+	</widget>
+    <widget id="magiccart_catalog" class="Magiccart\Magicproduct\Block\Widget\Catalog">
+        <label translate="true">Magicproduct Catalog Widget</label>
+        <description>Magicproduct Catalog</description>
+        <parameters>
+            <parameter name="identifier" xsi:type="select" source_model="Magiccart\Magicproduct\Model\Widget\Config\Catalog" required="true" visible="true" sort_order="10" >
+                <label translate="true">Identifier</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="catalog.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

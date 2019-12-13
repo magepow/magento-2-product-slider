@@ -1,0 +1,137 @@
+<?php
+/**
+ * Magiccart 
+ * @category 	Magiccart 
+ * @copyright 	Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license 	http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2016-01-08 22:57:12
+ * @@Modify Date: 2018-03-15 00:33:04
+ * @@Function:
+ */
+ ?>
+<?php if($this->getStatus() == 2) return; ?>
+<?php $selector = 'alo-content-'.rand(0,999999999); ?>
+<div class= "<?php /* @escapeNotVerified */ echo $selector?> megashop magicproduct +autoplay">
+<?php
+$tabs = $this->getTabs();
+$relatedTabs = $this->getRelatedTabs();
+$numTabs = count($tabs);
+$isAjax = $this->getAjax();
+$banner = $this->getBanner();
+/* @escapeNotVerified */ echo '<h3 class="title">'.$this->getCatName().'</h3>';
+if($numTabs): ?>
+    <span style="display:none" class="toggle-tab mobile"><i class="fa fa-bars"></i></span>
+    <div class="block-title-tabs toggle-content">
+		<ul class="magictabs" data-ajax ='<?php /* @escapeNotVerified */ echo $this->getAjaxCfg() ?>'>
+		<?php $activated = $this->getTabActivated();
+			$limit = $this->getLimit();
+			$single = ($numTabs ==1) ? 'single' : '';
+			foreach ($tabs as $type => $name):
+				$status  = (!$isAjax || $activated ==$type) ? 'loaded' : '';
+				$status .= ($type == $activated) ? " activated default $single" : '';
+				/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
+			endforeach;
+		?>
+		</ul>
+		<div class="floor-elevator">
+			<a href="#" class="btn-elevator up fa fa-angle-up"></a>
+			<a href="#" class="btn-elevator down fa fa-angle-down"></a>
+		</div>
+    </div>
+<?php endif ?>
+	<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($this->getIdentifier())->toHtml();?>
+	<div class="ajax_loading" style="display:none" data-url="<?php /* @escapeNotVerified */ echo $this->getUrl('magicproduct/index/catalog', array('_type' => 'direct_link', '_secure'=>$this->getRequest()->isSecure()))?>"></div>
+	<div class="product-box clearfix">
+	    <div class="row">
+		    <div class="col-sm-2 sub-category-wapper">
+		    	<?php if(count($relatedTabs)) : ?>
+					<ul class="sub-category-list <?php /* @escapeNotVerified */ echo $isAjax ? 'magictabs' : 'magiclinks'?>" data-ajax ='<?php echo $this->getAjaxCfg() ?>'>
+						 <?php
+							foreach ($relatedTabs as $cat):
+								/* @escapeNotVerified */ echo $isAjax ? '<li class="item cat" data-type ="'.$cat->getEntityId().'"><span class ="title">'.$cat->getName().'</span></li>' : '<li class="item cat" data-type ="'.$cat->getEntityId().'"><a href="'.$cat->getUrl().'"><span class ="title">'.$cat->getName().'</span></a></li>';
+							endforeach;
+						  ?>
+					</ul>
+				<?php endif; ?>
+				<?php
+					$blockBrand = $this->getIdentifier() . '-brand-logo';
+					echo  $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($blockBrand)->toHtml();
+				?>
+		    </div>
+			<div class="col-sm-10 col-right-tab">
+				<div class="product-featured clearfix">
+					<?php if($banner): ?>
+						<div class="banner-featured">
+							<div class="promotion" 
+								data-autoplay="false"
+								data-arrows="false"
+								data-autoplay-speed="3000"
+								data-dots="true"
+								data-infinite="true"
+								data-vertical="false"
+								data-vertical-swiping="false"
+								data-rows="1"
+								data-slides-to-show="1"
+								data-swipe-to-slide="true"
+							>
+					        <?php $i=0; foreach ($banner as $item) :?>
+					            <?php
+					                if($item['disabled']) continue;
+					                $image = $item['file'];
+					                $type  = $item['media_type'];
+					                $label = $item['label'];
+					            ?>
+								<div class="item <?php /* @escapeNotVerified */ echo $type ?>"
+					                <?php /* @escapeNotVerified */ echo ($item['video_url']) ? 'data-video="'. $item['video_url'] .'"' : ''; ?> 
+					            >
+					    			<a href="<?php /* @escapeNotVerified */ echo isset($item['link']) ? $item['link'] : '#'; ?>">
+					    				<img class="img-responsive" src="<?php /* @escapeNotVerified */ echo $this->getImage($image)?>" alt="<?php /* @escapeNotVerified */ echo __($label) ?>" title="<?php /* @escapeNotVerified */ echo __($label) ?>" />
+					    			</a>
+									<?php //echo isset($item['caption']) ? $item['caption'] : ''; ?>
+
+								</div>
+					        <?php endforeach ?>
+							</div>
+						</div>
+					<?php endif ?>
+					<div class="content-products <?php echo $banner ? '' : 'content-fullbox' ?>" 
+						<?php foreach ($this->getFrontendCfg() as $opt) :?>
+							data-<?php /* @escapeNotVerified */ echo $opt ?>='<?php /* @escapeNotVerified */ echo $this->getData($opt) ?>'
+						<?php endforeach;?>        
+						>
+						<?php 
+							$timer = $this->getTimer();
+							if($timer) echo $this->getContent('catalog/gridtimer.phtml');	
+							else echo $this->getContent('catalog/grid.phtml');	
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	require([
+		'jquery',
+		'magiccart/slick',
+		'magicproduct',
+		'alothemes',
+		], function($, slick, magicproduct, alothemes){
+			$(".<?php echo $selector?>").magicproduct({
+				selector : ".<?php echo $selector?>", // Selector product grid
+			});
+		});
+
+		require([
+		'jquery',
+		'magiccart/slick',
+		'alothemes',
+		], function($, slick, alothemes){
+			var banner = $(".<?php echo $selector?> .promotion");
+            if(banner.length) $('head').append(magicproduct(banner, '.item')); 
+			var brand = $(".<?php echo $selector?> .mega-brand");
+            if(brand.length) brand.slick(brand.data()); 
+
+		});
+</script>
