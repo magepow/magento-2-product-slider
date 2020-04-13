@@ -6,7 +6,7 @@
  * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-05 10:40:51
- * @@Modify Date: 2019-08-29 10:54:47
+ * @@Modify Date: 2020-04-13 10:54:47
  * @@Function:
  */
 
@@ -469,6 +469,11 @@ $collection->joinField(
         $stockItem = $this->stockRegistry->getStockItem($product->getId(), $product->getStore()->getWebsiteId());
         $qty = $stockItem->getQty();
         return $qty > 0 ? $qty : 0;
+    }
+
+    public function getCategory($categoryId)
+    {
+        return $this->categoryRepository->get($categoryId);
     }
 
 }
