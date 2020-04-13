@@ -54,6 +54,11 @@ class GridProduct extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $_productCollectionFactory;
 
     /**
+     * @var CategoryRepositoryInterface
+     */
+    protected $categoryRepository;
+
+    /**
      * Product collection factory
      *
      * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
@@ -82,6 +87,7 @@ class GridProduct extends \Magento\Catalog\Block\Product\AbstractProduct
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         \Magento\Framework\ObjectManagerInterface $objectManager,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         \Magento\CatalogInventory\Helper\Stock $stockFilter,
@@ -93,6 +99,7 @@ class GridProduct extends \Magento\Catalog\Block\Product\AbstractProduct
     ) {
         $this->urlHelper = $urlHelper;
         $this->_objectManager = $objectManager;
+        $this->categoryRepository = $categoryRepository;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_catalogProductVisibility = $catalogProductVisibility;
         $this->_stockFilter = $stockFilter;

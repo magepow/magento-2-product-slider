@@ -282,4 +282,9 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
         return $qty > 0 ? $qty : 0;
     }
 
+    public function getCategory($categoryId)
+    {
+        return $this->categoryRepository->get($categoryId);
+    }
+
 }
