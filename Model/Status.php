@@ -6,7 +6,7 @@
  * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-11 23:15:05
- * @@Modify Date: 2016-01-11 16:03:10
+ * @@Modify Date: 2020-04-26 16:03:10
  * @@Function:
  */
 
@@ -15,7 +15,7 @@ namespace Magiccart\Magicproduct\Model;
 class Status
 {
     const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 2;
+    const STATUS_DISABLED = 0;
 
     /**
      * get available statuses.
@@ -28,5 +28,10 @@ class Status
             self::STATUS_ENABLED => __('Enabled')
             , self::STATUS_DISABLED => __('Disabled'),
         ];
+    }
+
+    public static function getOptionArray()
+    {
+        return self::getAvailableStatuses();
     }
 }
