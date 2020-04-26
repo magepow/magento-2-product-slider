@@ -15,6 +15,13 @@ namespace Magiccart\Magicproduct\Model;
 class Magicproduct extends \Magento\Framework\Model\AbstractModel
 {
 
+    /**
+     * Name of object id field
+     *
+     * @var string
+     */
+    protected $_idFieldName = 'magicproduct_id';
+
     protected $_magicproductCollectionFactory;
 
     public function __construct(
