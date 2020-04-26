@@ -6,7 +6,7 @@
  * @license     http://www.magepow.com/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-14 20:26:27
- * @@Modify Date: 2019-08-12 16:14:15
+ * @@Modify Date: 2019-12-14 16:14:15
  * @@Function:
  */
 
@@ -224,8 +224,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getImage($file='')
     {
-        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $file;
-        return $resizedURL;
+        return $file ? $this->getMediaUrl() . $file : $this->getData('image');
     }
 
     public function getVideo($data){
