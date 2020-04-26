@@ -6,7 +6,7 @@
  * @license     http://www.magepow.com/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-14 20:26:27
- * @@Modify Date: 2019-12-14 16:14:15
+ * @@Modify Date: 2020-04-14 16:14:15
  * @@Function:
  */
 
@@ -14,23 +14,33 @@ namespace Magiccart\Magicproduct\Block\Widget;
 
 class Product extends \Magento\Framework\View\Element\Template implements \Magento\Widget\Block\BlockInterface
 {
-
-    protected $_storeManager;
-	protected $_magicproduct;
+    protected $_magicproduct;
     protected $_types;
-	protected $_tabs = array();
+    protected $_tabs = array();
     protected $_typeId = '1';
     protected $_options = array('limit', 'speed', 'timer', 'cart', 'compare', 'wishlist', 'review'); //'widthImages', 'heightImages'
     protected $_images = array();
+ 
+     /**
+     * @var \Magento\Backend\Model\UrlInterface
+     */
+    protected $backendUrl;
+
+    /**
+     * @var \Magiccart\Magicproduct\Model\MagicproductFactory
+     */
+    protected $magicproductFactory;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Magiccart\Magicproduct\Model\Magicproduct $magicproduct,
-		\Magiccart\Magicproduct\Model\System\Config\Types $types,
+        \Magento\Backend\Model\UrlInterface $backendUrl,
+        \Magiccart\Magicproduct\Model\MagicproductFactory $magicproductFactory,
+        \Magiccart\Magicproduct\Model\System\Config\Types $types,
         array $data = []
     ) {
-        $this->_magicproduct = $magicproduct;
-		$this->_types = $types;
+        $this->backendUrl          = $backendUrl;
+        $this->magicproductFactory = $magicproductFactory;
+        $this->_types              = $types;
 
         parent::__construct($context, $data);
     }
@@ -44,14 +54,20 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
     protected function _jnitWidget()
     {
         $identifier = $this->getIdentifier();
-        $item = $this->_magicproduct->getCollection()->addFieldToSelect('config')
-                        ->addFieldToFilter('identifier', $identifier)->addFieldToFilter('type_id', $this->_typeId)->getFirstItem();
-        $config = $item->getConfig();
-        $data = @unserialize($config);
-        if(!$data){
-            echo '<div class="message-error error message">Identifier "'. $identifier . '" not exist.</div> ';        
+        $this->_magicproduct = $this->magicproductFactory->create()->getCollection( $identifier, 'identifier')
+                                    ->addFieldToFilter('identifier', $identifier)
+                                    ->addFieldToFilter('type_id', $this->_typeId)
+                                    ->getFirstItem();
+        if (!$this->_magicproduct){
+            echo '<div class="message-error error message">Identifier "'. $identifier . '" not exist.</div> ';          
             return;
         }
+        if (!$this->_magicproduct->getStatus()){
+            return;
+        }
+        $config = $this->_magicproduct->getConfig();
+        $data = @unserialize($config);
+
         if($data['slide']){
             $breakpoints = $this->getResponsiveBreakpoints();
             $total = count($breakpoints);
@@ -68,6 +84,49 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
         }
         $data['jnit_widget'] =1 ;
         if(is_array($data)) $this->addData($data);
+    }
+
+    public function getMagicproduct()
+    {
+        return $this->_magicproduct;
+    }
+
+    public function getAdminUrl($adminPath, $routeParams=[], $storeCode = 'default' ) 
+    {
+        $routeParams[] = [ '_nosid' => true, '_query' => ['___store' => $storeCode]];
+        return $this->backendUrl->getUrl($adminPath, $routeParams);
+    }
+
+    public function getQuickedit()
+    {
+        $magicproduct = $this->getMagicproduct();
+        if($magicproduct){
+            $id = $magicproduct->getId();
+            $routeParams = [
+                'magicproduct_id' => $id
+            ];
+            $class      = (new \ReflectionClass($this))->getShortName();
+            $adminPath  = 'magicproduct/' . strtolower($class) . '/edit';
+            $editUrl    = $this->getAdminUrl($adminPath, $routeParams);
+            $moduleName = $this->getModuleName();
+            $moduleName = str_replace('_', ' > ', $moduleName);
+            $quickedit  = [
+                [
+                    'title' => __('%1 > %2 Id is: %3', $moduleName, $class, $id),
+                    'url'   => $editUrl
+                ],
+                [
+                    'title' => __('%1 > %2 Identifier is: %3', $moduleName, $class, $magicproduct->getIdentifier()),
+                    'url'   => $editUrl
+                ],
+                [
+                    'title' => __('Edit'),
+                    'url'   => $editUrl
+                ]
+            ];
+        }
+
+        return $quickedit;      
     }
 
     /**
@@ -124,7 +183,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getAjaxCfg()
     {
-    	if(!$this->getAjax()) return 0;
+        if(!$this->getAjax()) return 0;
         $ajax = array();
         foreach ($this->_options as $option) {
             $ajax[$option] = $this->getData($option);

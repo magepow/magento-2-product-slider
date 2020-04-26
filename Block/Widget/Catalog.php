@@ -1,12 +1,12 @@
 <?php
 /**
  * Magiccart 
- * @category 	Magiccart 
- * @copyright 	Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
- * @license 	http://www.magiccart.net/license-agreement.html
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-05 10:40:51
- * @@Modify Date: 2018-12-09 09:50:18
+ * @@Modify Date: 2020-04-26 09:50:18
  * @@Function:
  */
 
@@ -14,8 +14,6 @@ namespace Magiccart\Magicproduct\Block\Widget;
 
 class Catalog extends Product
 {
-
-
     protected $_categoryInstance;
     protected $_category;
     /**
@@ -25,22 +23,23 @@ class Catalog extends Product
      */
     protected $_catalogLayer;
 
-	protected $_typeId = '3';
+    protected $_typeId = '3';
     protected $_options = array('limit', 'speed', 'timer', 'cart', 'compare', 'wishlist', 'review', 'category_id'); //'widthImages', 'heightImages'
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Catalog\Helper\Category $catalogCategory,
-        \Magiccart\Magicproduct\Model\Magicproduct $magicproduct,
-		\Magiccart\Magicproduct\Model\System\Config\Types $types,
+        \Magento\Backend\Model\UrlInterface $backendUrl,
+        \Magiccart\Magicproduct\Model\MagicproductFactory $magicproductFactory,
+        \Magiccart\Magicproduct\Model\System\Config\Types $types,
         array $data = []
     ) {
 
         $this->_catalogCategory = $catalogCategory;
         $this->_categoryInstance = $categoryFactory->create();
 
-        parent::__construct($context, $magicproduct, $types, $data);
+        parent::__construct($context, $backendUrl, $magicproductFactory, $types, $data);
     }
 
     public function getCatName()
@@ -84,14 +83,14 @@ class Catalog extends Product
     {
         $content = '';   
         $tabs = ($this->getAjax()) ? $tabs = array($this->getTabActivated() => 'Activated') : $this->getTabs();
-    	foreach ($tabs as $type => $name) {
-    		$content .= $this->getLayout()->createBlock('Magiccart\Magicproduct\Block\Catalog\GridProduct') //, "magicproduct.category.$type"
-           	->setActivated($type) //or ->setData('activated', $this->getTabActivated())
-           	->setCfg($this->getData())
-           	->setTemplate($template)
-           	->toHtml();
+        foreach ($tabs as $type => $name) {
+            $content .= $this->getLayout()->createBlock('Magiccart\Magicproduct\Block\Catalog\GridProduct') //, "magicproduct.category.$type"
+            ->setActivated($type) //or ->setData('activated', $this->getTabActivated())
+            ->setCfg($this->getData())
+            ->setTemplate($template)
+            ->toHtml();
         }
-    	return $content;
+        return $content;
     }
 
     public function getImage($file='')
