@@ -5,7 +5,7 @@
  * @license 	http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2014-04-25 13:16:48
- * @@Modify Date: 2018-11-30 11:08:12
+ * @@Modify Date: 2020-04-28 11:08:12
  * @@Function:
  */
 
@@ -80,7 +80,8 @@ define([
 					if($this.hasClass('activated')){
 						var productsActivated = $product.find(typeClass).addClass('activated').find('.products-grid .items');
 						if(options.slidesToShow){
-							$head.append('<style type="text/css">' + classes + '{float: left; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
+							var float  = $('body').hasClass('rtl') ? 'right' : 'left';
+							$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
 							methods.productSlider(options, productsActivated);
 						} else{
 							isGrid = true;
@@ -127,7 +128,8 @@ define([
             	var padding 	= options.padding;
 				var responsive 	= options.responsive;
 				var length = Object.keys(responsive).length;
-				style += padding ? classes + '{float: left; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}' : '';
+				var float  = $('body').hasClass('rtl') ? 'right' : 'left';
+				style += padding ? classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}' : '';
 				
 				$.each( responsive, function( key, value ) { // data-responsive="[{"1":"1"},{"361":"1"},{"480":"2"},{"640":"3"},{"768":"3"},{"992":"4"},{"1200":"4"}]"
 					var col = 0;
@@ -143,11 +145,11 @@ define([
 						$.each( responsive[key], function( size, num) { maxWith = size; col = num;});
 						style += ' @media (min-width: '+maxWith+'px)';
 					}
-					style += ' {'+selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+col+'n+1){clear: left;}}';
+					style += ' {'+selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+col+'n+1){clear: ' + float + ';}}';
 				});
 				// $.each( responsive, function( key, value ) { // data-responsive="[{"col":"1","min":1,"max":360},{"col":"2","min":361,"max":479},{"col":"3","min":480,"max":639},{"col":"3","min":640,"max":767},{"col":"4","min":768,"max":991},{"col":"4","min":992,"max":1199},{"col":"4","min":1200,"max":3600}]"
 				// var padding = options.padding*(value.max/1200); // padding responsive
-				// 	style += ' @media (min-width: '+value.min+'px) and (max-width: '+value.max+'px) {'+selector + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/value.col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+value.col+'n+1){clear: left;}}';
+				// 	style += ' @media (min-width: '+value.min+'px) and (max-width: '+value.max+'px) {'+selector + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/value.col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+value.col+'n+1){clear: ' + float + ';}}';
 				// });
 
 				$head.append('<style type="text/css">'+style+'</style>');
