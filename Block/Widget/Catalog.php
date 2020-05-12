@@ -93,10 +93,10 @@ class Catalog extends Product
         return $content;
     }
 
-    public function getImage($file='')
-    {
-        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) .'magiccart/magicproduct'. $file;
-        return $resizedURL;
-    }
+    // public function getImage($file='')
+    // {
+    //     $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) .'magiccart/magicproduct'. $file;
+    //     return $resizedURL;
+    // }
 
 }

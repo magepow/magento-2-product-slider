@@ -164,13 +164,13 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
         //     'text'      => 'Content HTML, Text...etc',
         // ));
 
-        // $fieldset->addField('image', 'image',
-        //     [
-        //         'label' => __('Image'),
-        //         'title' => __('Image'),
-        //         'name'  => 'image',
-        //     ]
-        // );
+        $fieldset->addField('image', 'image',
+            [
+                'label' => __('Image'),
+                'title' => __('Image'),
+                'name'  => 'image',
+            ]
+        );
 
         $fieldset->addField('ajax', 'select',
             [
