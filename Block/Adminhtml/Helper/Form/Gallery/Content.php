@@ -48,7 +48,8 @@ class Content extends \Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Galle
         $this->getChildBlock('uploader')->setTemplate('Magiccart_Magicproduct::media/uploader.phtml');
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->addSessionParam()->getUrl('magicproduct/index_gallery/upload')
+            // $this->_urlBuilder->addSessionParam()->getUrl('magicproduct/index_gallery/upload')
+            $this->_urlBuilder->getUrl('magicproduct/index_gallery/upload')
         )->setFileField(
             'image'
         )->setFilters(
