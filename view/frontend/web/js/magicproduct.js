@@ -5,7 +5,7 @@
  * @license 	http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2014-04-25 13:16:48
- * @@Modify Date: 2020-04-28 11:08:12
+ * @@Modify Date: 2020-05-18 11:08:12
  * @@Function:
  */
 
@@ -119,6 +119,9 @@ define([
 				if(el.hasClass('slick-initialized')) el.slick("refresh"); // slide.resize(); // $(window).trigger('resize');
 				else{ // var selector = $content.selector; // '.' + $content.attr('class').trim().replace(/ /g , '.');
 					if( !options.vertical && $('body').hasClass('rtl') ) el.attr('dir', 'rtl');
+                    el.on('init', function(event, slick){
+                        $('body').trigger('contentUpdated');
+                    });
 					el.slick(options);
 				}
             }, 
