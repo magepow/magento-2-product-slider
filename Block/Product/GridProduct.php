@@ -393,12 +393,8 @@ $collection->joinField(
                 ]
             ],
             'left'
-        )->addAttributeToFilter(
-            [
-                ['attribute' => 'special_from_date', 'is' => new \Zend_Db_Expr('not null')],
-                ['attribute' => 'special_to_date', 'is' => new \Zend_Db_Expr('not null')],
-            ]
-        )->addAttributeToSort('special_to_date', 'desc')
+        )->addAttributeToFilter('special_price', ['neq' => ''])
+        ->addAttributeToSort('special_to_date', 'desc')
         ->setPageSize($this->_limit)->setCurPage(1);
 
         return $collection;
