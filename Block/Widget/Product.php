@@ -283,6 +283,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getImage($file='')
     {
+        if($file) $file = (strpos($file, 'magiccart/magicproduct') !== false) ? $file : 'magiccart/magicproduct' . $file;
         return $file ? $this->getMediaUrl() . $file : $this->getData('image');
     }
 
