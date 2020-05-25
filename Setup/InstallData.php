@@ -58,7 +58,7 @@ class InstallData implements InstallDataInterface
             'label' => 'Featured Product',
             'input' => 'boolean',
             'class' => '',
-            'source' => '',
+            'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
             'global' => \Magento\Catalog\Model\ResourceModel\Eav\Attribute::SCOPE_STORE,
             'visible' => true,
             'required' => false,
@@ -70,7 +70,9 @@ class InstallData implements InstallDataInterface
             'visible_on_front' => false,
             'used_in_product_listing' => true,
             'unique' => false,
-            'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+            'is_used_in_grid' => true,
+            'is_filterable_in_grid' => true,
+            'apply_to' => ''
             ]
             );
 
