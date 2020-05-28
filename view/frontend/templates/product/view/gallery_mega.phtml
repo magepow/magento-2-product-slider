@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+<?php $selector = 'gallery-' . uniqid(); ?>
+<?php
+$images = $block->getGalleryImagesJson();
+$images = json_decode($images);
+if ( empty($images) ) return;
+?>
+<div class="<?php echo $selector?> gallery-product-slider" >
+    <div class="slider slider-for">
+        <?php foreach ($images as $img) : ?>
+            <div data-thumb="<?php /* @escapeNotVerified */ echo $img->thumb ?>"><img src="<?php /* @escapeNotVerified */ echo $img->img ?>"></div>
+        <?php endforeach; ?>
+    </div>
+    <div class="vertical">
+    <div class="slider slider-nav">
+        <?php foreach ($images as $img) : ?>
+            <div data-thumb="<?php /* @escapeNotVerified */ echo $img->thumb ?>"><img src="<?php /* @escapeNotVerified */ echo $img->img ?>"></div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'magiccart/slick'
+        ], function($, slick){
+        var slider    = $('.<?php echo $selector?>');
+        var sliderFor = slider.find('.slider-for');
+        var sliderNav = slider.find('.slider-nav');
+        if(!$(sliderFor).hasClass('slick-initialized')) {
+             sliderFor.slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                pauseOnHover: true,
+                arrows: true,
+                fade: true,
+                asNavFor: sliderNav,
+                speed: 100
+            });
+            sliderNav.slick({
+                vertical: true,
+                verticalSwiping: true,
+                slidesToShow: 2,
+                dots: false,
+                arrows: false,
+                infinite: true,
+                asNavFor: sliderFor,
+                dots: true,
+                centerMode: true,
+                focusOnSelect: true,
+                infinite: false,
+                speed: 100
+            });
+        }
+
+    });
+</script>
