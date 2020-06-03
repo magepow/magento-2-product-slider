@@ -6,7 +6,7 @@
  * @license     http://www.magepow.com/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-14 20:26:27
- * @@Modify Date: 2020-04-14 16:14:15
+ * @@Modify Date: 2020-06-03 16:14:15
  * @@Function:
  */
 
@@ -81,6 +81,8 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
             $data['slides-To-Show'] = $data['visible'];
             // $data['swipe-To-Slide'] = 'true';
             $data['vertical-Swiping'] = $data['vertical'];
+            if(!isset($data['fade'])) $data['fade'] = 'false';
+            if(!isset($data['center-Mode'])) $data['center-Mode'] = 'false';
         }
         $data['jnit_widget'] =1 ;
         if(is_array($data)) $this->addData($data);
@@ -204,7 +206,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getSlideOptions()
     {
-        return array('autoplay', 'arrows', 'autoplay-Speed', 'dots', 'infinite', 'padding', 'vertical', 'vertical-Swiping', 'responsive', 'rows', 'slides-To-Show');
+        return array('autoplay', 'arrows', 'fade', 'center-Mode', 'autoplay-Speed', 'dots', 'infinite', 'padding', 'vertical', 'vertical-Swiping', 'responsive', 'rows', 'slides-To-Show');
     }
 
     public function getFrontendCfg()

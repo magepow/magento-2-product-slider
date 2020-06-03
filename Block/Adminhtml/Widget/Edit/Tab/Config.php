@@ -6,7 +6,7 @@
  * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-05 10:40:51
- * @@Modify Date: 2017-05-03 17:50:51
+ * @@Modify Date: 2020-06-03 17:50:51
  * @@Function:
  */
 
@@ -80,9 +80,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             $fieldset->addField('magicproduct_id', 'hidden', ['name' => 'magicproduct_id']);
         }
 
-        $fieldset->addField(
-            'timer',
-            'select',
+        $fieldset->addField('timer', 'select',
             [
                 'label' => __('Timer'),
                 'title' => __('Timer'),
@@ -92,9 +90,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
-        $fieldset->addField(
-            'slide',
-            'select',
+        $fieldset->addField('slide', 'select',
             [
                 'label' => __('Slide'),
                 'title' => __('Slide'),
@@ -105,9 +101,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
         );
 
         // Option with value TRUE or FALSE
-        $fieldset->addField(
-            'vertical',
-            'select',
+        $fieldset->addField('vertical', 'select',
             [
                 'label' => __('Slide Vertical'),
                 'title' => __('Slide Vertical'),
@@ -117,9 +111,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
-        $fieldset->addField(
-            'infinite',
-            'select',
+        $fieldset->addField('infinite', 'select',
             [
                 'label' => __('Infinite'),
                 'title' => __('Infinite'),
@@ -128,9 +120,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
-        $fieldset->addField(
-            'autoplay',
-            'select',
+        $fieldset->addField('autoplay', 'select',
             [
                 'label' => __('Auto Play'),
                 'title' => __('Auto Play'),
@@ -139,9 +129,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );        
 
-        $fieldset->addField(
-            'arrows',
-            'select',
+        $fieldset->addField('arrows', 'select',
             [
                 'label' => __('Arrows'),
                 'title' => __('Arrows'),
@@ -150,9 +138,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
-        $fieldset->addField(
-            'dots',
-            'select',
+        $fieldset->addField('dots', 'select',
             [
                 'label' => __('Dots'),
                 'title' => __('Dots'),
@@ -162,9 +148,27 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic implements \Mage
             ]
         );
 
-        $fieldset->addField(
-            'rows',
-            'select',
+        $fieldset->addField('fade', 'select',
+            [
+                'label' => __('Fade'),
+                'title' => __('fade'),
+                'name' => 'fade',
+                'options' => $this->_trueFalse,
+                'value' => 'false',
+            ]
+        );
+
+        $fieldset->addField('center-Mode', 'select',
+            [
+                'label' => __('Center Mode'),
+                'title' => __('Center Mode'),
+                'name' => 'center-Mode',
+                'options' => $this->_trueFalse,
+                'value' => 'false',
+            ]
+        );
+
+        $fieldset->addField('rows', 'select',
             [
                 'label' => __('Rows'),
                 'title' => __('Rows'),
