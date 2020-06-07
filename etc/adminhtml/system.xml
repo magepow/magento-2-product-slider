@@ -22,12 +22,12 @@
             <resource>Magiccart_Magicproduct::config_magicproduct</resource>
             <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
-                <field id="enabled" translate="label comment" type="select" sortOrder="0"  showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enabled" translate="label comment" type="select" sortOrder="0"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
                     <comment>Enable frontend</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="ua_regexp" translate="label comment tooltip" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="ua_regexp" translate="label comment tooltip" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
                     <label>User-Agent Exceptions</label>
                     <frontend_model>Magento\Config\Block\System\Config\Form\Field\Regexceptions</frontend_model>
                     <backend_model>Magento\Theme\Model\Design\Backend\Exceptions</backend_model>
