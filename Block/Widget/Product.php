@@ -101,34 +101,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getQuickedit()
     {
-        $magicproduct = $this->getMagicproduct();
-        if($magicproduct){
-            $id = $magicproduct->getId();
-            $routeParams = [
-                'magicproduct_id' => $id
-            ];
-            $class      = (new \ReflectionClass($this))->getShortName();
-            $adminPath  = 'magicproduct/' . strtolower($class) . '/edit';
-            $editUrl    = $this->getAdminUrl($adminPath, $routeParams);
-            $moduleName = $this->getModuleName();
-            $moduleName = str_replace('_', ' > ', $moduleName);
-            $quickedit  = [
-                [
-                    'title' => __('Admin Panel > %1 > %2 Id is: %3', $moduleName, $class, $id),
-                    'url'   => $editUrl
-                ],
-                [
-                    'title' => __('Admin Panel > %1 > %2 Identifier is: %3', $moduleName, $class, $magicproduct->getIdentifier()),
-                    'url'   => $editUrl
-                ],
-                [
-                    'title' => __('Edit'),
-                    'url'   => $editUrl
-                ]
-            ];
-        }
-
-        return $quickedit;      
+        return;      
     }
 
     /**
