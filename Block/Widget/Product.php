@@ -114,11 +114,11 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
             $moduleName = str_replace('_', ' > ', $moduleName);
             $quickedit  = [
                 [
-                    'title' => __('%1 > %2 Id is: %3', $moduleName, $class, $id),
+                    'title' => __('Admin Panel > %1 > %2 Id is: %3', $moduleName, $class, $id),
                     'url'   => $editUrl
                 ],
                 [
-                    'title' => __('%1 > %2 Identifier is: %3', $moduleName, $class, $magicproduct->getIdentifier()),
+                    'title' => __('Admin Panel > %1 > %2 Identifier is: %3', $moduleName, $class, $magicproduct->getIdentifier()),
                     'url'   => $editUrl
                 ],
                 [
