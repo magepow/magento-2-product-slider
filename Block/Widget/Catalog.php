@@ -59,6 +59,7 @@ class Catalog extends Product
         if(!$this->_tabs){
             $tabs = array();
             $cfg = $this->getTypes();
+            if(!$cfg) return $tabs;
             $types = $this->_types->toOptionArray();
             foreach ($types as $type) {
                 if(in_array($type['value'], $cfg)) $tabs[$type['value']] = $type['label'];
