@@ -36,7 +36,7 @@ define([
 			// $product.data( 'vertical-reverse', true );
 		}
         var options 	= $product.data();
-        var padding 	= (options.padding === undefined) ? settings.padding : options.padding;
+        var padding 	= ((options || {}).padding === void 0) ? settings.padding : options.padding;
 		var $tabs 		= $(settings.tabs, $content);
 		var infotabs 	= $tabs.data('ajax')
 		var $itemtabs 	= $('.item',$tabs);
