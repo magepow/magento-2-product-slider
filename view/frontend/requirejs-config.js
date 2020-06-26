@@ -6,9 +6,9 @@ var config = {
 		},
 	},
 
-	paths: {
-		'magiccart/slick'			: 'Magiccart_Magicproduct/js/plugins/slick.min',
-	},
+	// paths: {
+	// 	'magiccart/slick'			: 'Magiccart_Magicproduct/js/plugins/slick.min',
+	// },
 
 	shim: {
 		'magiccart/slick': {
