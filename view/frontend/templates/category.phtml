@@ -11,7 +11,7 @@
  */
  ?>
 <?php if($this->getStatus() == 2) return; ?>
-<?php $selector = 'alo-content-'.rand(0,999999999); ?>
+<?php $selector = 'alo-content-'.uniqid(); ?>
 <div class= "<?php /* @escapeNotVerified */ echo $selector?> magiccategory autoplay">
 <?php
 $tabs = $this->getTabs();
