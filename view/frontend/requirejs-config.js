@@ -6,14 +6,7 @@ var config = {
 		},
 	},
 
-	paths: {
-		'magiccart/slick'	: 'Magiccart_Magicproduct/js/plugins/slick.min',
-	},
-
 	shim: {
-		'magiccart/slick': {
-			deps: ['jquery']
-		},
 		'magicproduct': {
 			deps: ['jquery', 'magiccart/slick']
 		},

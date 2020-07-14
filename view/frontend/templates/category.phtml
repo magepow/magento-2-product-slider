@@ -6,11 +6,11 @@
  * @license 	http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-08 22:57:12
- * @@Modify Date: 2019-08-12 00:33:45
+ * @@Modify Date: 2020-07-14 00:33:45
  * @@Function:
  */
  ?>
-<?php if($this->getStatus() == 2) return; ?>
+<?php if(!$this->getStatus()) return; ?>
 <?php $selector = 'alo-content-'.uniqid(); ?>
 <div class= "<?php /* @escapeNotVerified */ echo $selector?> magiccategory autoplay">
 <?php
