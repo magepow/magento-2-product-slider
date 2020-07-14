@@ -1,6 +1,9 @@
 {
   "name": "magiccart/magicproduct",
   "description": "N/A",
+  "require": {
+    "magiccart/module-community" : ">=2.0"
+  },
   "type": "magento2-module",
   "license": [
     "OSL-3.0",
