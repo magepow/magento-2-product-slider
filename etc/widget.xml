@@ -27,9 +27,6 @@
                     <option name="custom" value="productcustom.phtml">
                         <label translate="true">Product Custom</label>
                     </option>
-                    <option name="hotdeals" value="magicproduct-countdown.phtml">
-                        <label translate="true">Product Countdown</label>
-                    </option>
                 </options>
             </parameter>
         </parameters>
@@ -46,9 +43,6 @@
                 <options>
                     <option name="default" value="category.phtml" selected="true">
                         <label translate="true">Default</label>
-                    </option>
-                    <option name="category-countdown" value="category-countdown.phtml">
-                        <label translate="true">category Countdown</label>
                     </option>
                     <option name="custom" value="category-custom.phtml">
                         <label translate="true">Category custom</label>

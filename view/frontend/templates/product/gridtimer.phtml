@@ -18,7 +18,7 @@ use Magento\Framework\App\Action\Action;
 <?php
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
-$_aloHelper = $this->helper('Magiccart\Alothemes\Helper\Data');
+$_aloHelper = $this->helper('Magiccart\Magicproduct\Helper\Alothemes');
 ?>
 <div class="mage-magictabs mc-<?php echo $this->escapeHtml($this->getTypeFilter());?>">
 <?php if (!$_productCollection->count()): ?>

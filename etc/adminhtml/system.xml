@@ -2,11 +2,11 @@
 <!-- /**
  * Magiccart 
  * @category    Magiccart 
- * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
- * @license     http://www.magiccart.net/license-agreement.html
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.alothemes.com/) 
+ * @license     http://www.alothemes.com/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-23 18:59:34
- * @@Modify Date: 2017-08-29 18:17:22
+ * @@Modify Date: 2020-07-29 17:17:22
  * @@Function:
  */ -->
  
@@ -15,7 +15,7 @@
         <tab id="Magiccart" translate="label" sortOrder="86">
             <label>Magiccart</label>
         </tab>
-        <section id="magicproduct" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="magiccart_magicproduct" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Magicproduct</label>
             <tab>Magiccart</tab>
