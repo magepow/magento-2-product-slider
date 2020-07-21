@@ -18,7 +18,7 @@
         <section id="magiccart_magicproduct" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Magicproduct</label>
-            <tab>Magiccart</tab>
+            <tab>magiccart</tab>
             <resource>Magiccart_Magicproduct::config_magicproduct</resource>
             <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
