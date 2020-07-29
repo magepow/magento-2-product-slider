@@ -16,11 +16,11 @@
 ### ✓ Install Magiccart Magicproduct via composer (recommend)
 Run the following command in Magento 2 root folder:
 
-`composer require magiccart/magicproduct`
-
-`php bin/magento setup:upgrade`
-
-`php bin/magento setup:static-content:deploy -f`
+```
+composer require magiccart/magicproduct
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy -f
+```
 
 ## Magiccart Magicproduct user guide
 [USE GUIDE](https://docs.alothemes.com/m2/extension/productslider/)
