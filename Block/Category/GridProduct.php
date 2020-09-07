@@ -99,7 +99,7 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
 
         $this->_limit = (int) $this->getWidgetCfg('limit');
         $this->_types = $this->escapeHtml($this->getWidgetCfg('types'));
-        if(!$this->_types) return $this->_productCollection->setPageSize($this->_limit);
+        if(!$this->_types || is_array($this->_types)) return $this->_productCollection->setPageSize($this->_limit);
         $fn = 'get' . ucfirst( $this->_types );
         $collection = $this->{$fn}($this->_productCollection);
 
