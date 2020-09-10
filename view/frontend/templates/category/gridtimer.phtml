@@ -36,12 +36,11 @@ $_aloHelper = $this->helper('Magiccart\Magicproduct\Helper\Alothemes');
     ?>
     <?php 
         $config     = $this->getWidgetCfg(); 
-        // $width      = $config['widthImages'];
-        // $height     = $config['heightImages'];
-        $showCart       = $config['cart'];
-        $showCompare    = $config['compare'];
-        $showWishlist   = $config['wishlist'];
-        $showReview     = $config['review'];
+        $timer          = $config['timer']    ?? '';
+        $showCart       = $config['cart']     ?? '';
+        $showCompare    = $config['compare']  ?? '';
+        $showWishlist   = $config['wishlist'] ?? '';
+        $showReview     = $config['review']   ?? '';
     ?>
     <div class="products wrapper <?php /* @escapeNotVerified */ echo $viewMode; ?> products-<?php /* @escapeNotVerified */ echo $viewMode; ?>">
         <?php $iterator = 1; ?>

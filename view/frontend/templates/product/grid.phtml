@@ -35,11 +35,11 @@ $_aloHelper = $this->helper('Magiccart\Magicproduct\Helper\Alothemes');
     ?>
     <?php 
         $config     = $this->getWidgetCfg(); 
-        $timer       = $config['timer'];
-        $showCart       = $config['cart'];
-        $showCompare    = $config['compare'];
-        $showWishlist   = $config['wishlist'];
-        $showReview     = $config['review'];
+        $timer          = $config['timer']    ?? '';
+        $showCart       = $config['cart']     ?? '';
+        $showCompare    = $config['compare']  ?? '';
+        $showWishlist   = $config['wishlist'] ?? '';
+        $showReview     = $config['review']   ?? '';
 		$swatchesRender = $block->getLayout()->createBlock('Magento\Swatches\Block\Product\Renderer\Listing\Configurable')->setTemplate('Magiccart_Magicproduct::product/listing/renderer.phtml');
     ?>
     <div class="products wrapper <?php /* @escapeNotVerified */ echo $viewMode; ?> products-<?php /* @escapeNotVerified */ echo $viewMode; ?>">
