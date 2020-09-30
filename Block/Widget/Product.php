@@ -251,7 +251,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
     {
         if(!$this->_images){
             $gallery = $this->getData('media_gallery');
-            $this->_images = $gallery['images'];
+            if( issuet($gallery['images']) ) $this->_images = $gallery['images'];
         }
         return $this->_images;
     }
