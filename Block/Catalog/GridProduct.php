@@ -110,6 +110,7 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
         $fn = 'get' . ucfirst( $this->_type);
         $collection = $this->{$fn}($this->_productCollection);
 
+        if(is_null($collection)) return $this->_productCollection;
         $parameters = $this->_parameters;
         if($parameters){
             $rule = $this->getRule($parameters);
