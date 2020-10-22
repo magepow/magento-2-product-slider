@@ -6,14 +6,16 @@
  * @license     http://www.magepow.com/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-14 20:26:27
- * @@Modify Date: 2020-06-03 16:14:15
+ * @@Modify Date: 2020-10-22 16:14:15
  * @@Function:
  */
 
 namespace Magiccart\Magicproduct\Block\Widget;
 
-class Product extends \Magento\Framework\View\Element\Template implements \Magento\Widget\Block\BlockInterface
+class Product extends \Magento\Framework\View\Element\Template implements \Magento\Widget\Block\BlockInterface, \Magento\Framework\DataObject\IdentityInterface
 {
+    const DEFAULT_CACHE_TAG = 'MAGICCART_MAGICPRODUCT';
+
     protected $_magicproduct;
     protected $_types;
     protected $_tabs = array();
@@ -50,7 +52,27 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
         if ($this->hasData('identifier')) {$this->_jnitWidget();}
         parent::_construct();
     }
-    
+
+    protected function getCacheLifetime()
+    {
+        return parent::getCacheLifetime() ?: 86400;
+    }
+
+    public function getCacheKeyInfo()
+    {
+        $keyInfo     =  parent::getCacheKeyInfo();
+        $keyInfo[]   =  $this->getMagicproduct()->getId();
+        return $keyInfo;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::DEFAULT_CACHE_TAG, self::DEFAULT_CACHE_TAG . '_' . $this->getMagicproduct()->getId()];
+    }
+
     protected function _jnitWidget()
     {
         $identifier = $this->getIdentifier();
