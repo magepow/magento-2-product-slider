@@ -170,39 +170,39 @@ class ListProduct extends AbstractProduct implements IdentityInterface
      */
     protected function _beforeToHtml()
     {
-        $toolbar = $this->getToolbarBlock();
+        // $toolbar = $this->getToolbarBlock();
 
-        // called prepare sortable parameters
-        $collection = $this->_getProductCollection();
+        // // called prepare sortable parameters
+        // $collection = $this->_getProductCollection();
 
-        // use sortable parameters
-        $orders = $this->getAvailableOrders();
-        if ($orders) {
-            $toolbar->setAvailableOrders($orders);
-        }
-        $sort = $this->getSortBy();
-        if ($sort) {
-            $toolbar->setDefaultOrder($sort);
-        }
-        $dir = $this->getDefaultDirection();
-        if ($dir) {
-            $toolbar->setDefaultDirection($dir);
-        }
-        $modes = $this->getModes();
-        if ($modes) {
-            $toolbar->setModes($modes);
-        }
+        // // use sortable parameters
+        // $orders = $this->getAvailableOrders();
+        // if ($orders) {
+        //     $toolbar->setAvailableOrders($orders);
+        // }
+        // $sort = $this->getSortBy();
+        // if ($sort) {
+        //     $toolbar->setDefaultOrder($sort);
+        // }
+        // $dir = $this->getDefaultDirection();
+        // if ($dir) {
+        //     $toolbar->setDefaultDirection($dir);
+        // }
+        // $modes = $this->getModes();
+        // if ($modes) {
+        //     $toolbar->setModes($modes);
+        // }
 
-        // set collection to toolbar and apply sort
-        $toolbar->setCollection($collection);
+        // // set collection to toolbar and apply sort
+        // $toolbar->setCollection($collection);
 
-        $this->setChild('toolbar', $toolbar);
-        $this->_eventManager->dispatch(
-            'catalog_block_product_list_collection',
-            ['collection' => $this->_getProductCollection()]
-        );
+        // $this->setChild('toolbar', $toolbar);
+        // $this->_eventManager->dispatch(
+        //     'catalog_block_product_list_collection',
+        //     ['collection' => $this->_getProductCollection()]
+        // );
 
-        $this->_getProductCollection()->load();
+        // $this->_getProductCollection()->load();
 
         return parent::_beforeToHtml();
     }
