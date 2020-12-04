@@ -20,6 +20,7 @@ define([
             classes  : '.product-item', // Selector product grid
             tabs 	 : '.magictabs',
             loading  : '.ajax_loading',
+            loadmore : '.action-more',
             product  : '.content-products',
             padding  : 15, // padding item
         };
@@ -30,6 +31,7 @@ define([
         var product 	= settings.product;
         var $content 	= $(this);
         var $product 	= $(product, $content);
+        var loadmore 	= $(settings.loadmore, $content);
 		if( !$product.data( 'vertical') && $('body').hasClass('rtl') ){
 			$product.attr('dir', 'rtl');
 			$product.data( 'rtl', true );
@@ -53,14 +55,6 @@ define([
                     methods.magicproductLoad();
                 });
             },
-            
-            /******************************
-            Initialize Items
-            Fully initialize everything. Plugin is loaded and ready after finishing execution
-        *******************************/
-            // initialize : function(options) {
-            //     Object.extend(settings, options);
-            // },
 
             magicproductLoad: function(buttonClass){
             	// over tab
@@ -78,11 +72,13 @@ define([
 					var type = $this.data('type');
 					var typeClass = '.mc-'+type;
 					if($this.hasClass('activated')){
-						var productsActivated = $product.find(typeClass).addClass('activated').find('.products-grid .items');
+						var productsActivated = $product.find(typeClass).addClass('activated');
+						var nextPage = productsActivated.data('next-page');
+						methods.loadMoreButton(nextPage);
 						if(options.slidesToShow){
 							var float  = $('body').hasClass('rtl') ? 'right' : 'left';
 							$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
-							methods.productSlider(options, productsActivated);
+							methods.productSlider(options, productsActivated.find('.products-grid .items'));
 						} else{
 							isGrid = true;
 							methods.productGrid(options);
@@ -106,13 +102,47 @@ define([
 							$content.find('.banner-'+ type ).slideDown(500).addClass('activated');
 							// end banner tab
 							var productsActivated = $product.find(typeClass).addClass('activated'); //.fadeIn(); // not show()
+							var nextPage = productsActivated.data('next-page');
+							methods.loadMoreButton(nextPage);
 							productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
 							productsActivated = productsActivated.find('.products-grid .items');
 							if(isGrid) methods.playAnimate(productsActivated); //require for Animate
 							else  methods.productSlider(options, productsActivated);
 						}
 				});
+				methods.loadMore();
+            },
 
+            loadMore : function() {
+				$content.on("click", settings.loadmore + ' .load-more', function(){
+					var $this = $tabs.find('.item.activated');
+					var type  = $this.data('type');
+					if(type == undefined) return;
+					var typeClass = '.mc-'+type;
+					if($this.hasClass('loaded')){
+						var productsActivated = $product.find(typeClass); //.fadeIn(); // not show()
+						var nextPage = productsActivated.data('next-page');
+						methods.loadMoreButton(nextPage);
+						if(nextPage < 2) return;
+						var info = $.extend(infotabs, { 'p' : nextPage});
+						methods.sendAjax(type, info, nextPage);
+					} 
+				});
+            },
+
+            loadMoreButton : function(nextPage=0){
+            	if(nextPage){
+            		loadmore.show();
+            	}else {
+            		loadmore.hide();
+            	}
+            	if(nextPage > 1){
+					loadmore.find('.load-more').show();
+					loadmore.find('.load-end').hide();
+            	}else {
+					loadmore.find('.load-more').hide();
+					loadmore.find('.load-end').show();
+            	}
             },
 
             productSlider : function(options, el) {
@@ -150,20 +180,16 @@ define([
 					}
 					style += ' {'+selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+col+'n+1){clear: ' + float + ';}}';
 				});
-				// $.each( responsive, function( key, value ) { // data-responsive="[{"col":"1","min":1,"max":360},{"col":"2","min":361,"max":479},{"col":"3","min":480,"max":639},{"col":"3","min":640,"max":767},{"col":"4","min":768,"max":991},{"col":"4","min":992,"max":1199},{"col":"4","min":1200,"max":3600}]"
-				// var padding = options.padding*(value.max/1200); // padding responsive
-				// 	style += ' @media (min-width: '+value.min+'px) and (max-width: '+value.max+'px) {'+selector + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/value.col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+value.col+'n+1){clear: ' + float + ';}}';
-				// });
 
 				$head.append('<style type="text/css">'+style+'</style>');
 
             },
 
-            sendAjax : function(type, infotabs) {
+            sendAjax : function(type, infotabs, nextPage=1) {
 				$loading.show();
 				$.ajax({
 					type: 'post',
-					data: { type: type, info: infotabs },
+					data: { type: type, info: infotabs, p : nextPage },
 					url : $loading.data('url'),
 					success:function(data){
 						$loading.hide();
@@ -172,7 +198,19 @@ define([
 						$content.find('.banner-'+ type ).slideDown(500).addClass('activated');
 						// end banner tab
 						var typeClass = '.mc-'+type;
-						var productsActivated = $content.find(product).append(data).find(typeClass).addClass('activated');
+						var products  = $content.find(product);
+						var productsActivated = products.find(typeClass);
+						var productMore = $(data);
+						var nextPage 	= productMore.data('next-page');
+						if(productsActivated.length){
+							var productsActivated = $content.find(product).find(typeClass).addClass('activated');
+							productsActivated.data('next-page', nextPage);
+							productsActivated.find('.products.items').append(productMore.find('.products.items').html());
+							nextPage++; // nextPage + 1 is ajax.
+						} else {
+							var productsActivated = products.append(data).find(typeClass).addClass('activated');
+						}
+						methods.loadMoreButton(nextPage); 
 						productsActivated.trigger('contentUpdated');
 						productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
 						productsActivated = productsActivated.find('.products-grid .items');

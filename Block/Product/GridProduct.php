@@ -144,28 +144,27 @@ class GridProduct extends \Magento\Catalog\Block\Product\AbstractProduct
 
     public function getLoadedProductCollection()
     {
-            $this->_limit = (int) $this->getWidgetCfg('limit');
-            $type = $this->getTypeFilter();
-            $fn = 'get' . ucfirst($type) . 'Products';
-            $collection = $this->{$fn}();
+        $this->_limit = (int) $this->getWidgetCfg('limit');
+        $type = $this->getTypeFilter();
+        $fn = 'get' . ucfirst($type) . 'Products';
+        $collection = $this->{$fn}();
 
-            $parameters = $this->_parameters;
-            if($parameters){
-                $rule = $this->getRule($parameters);
-                $conditions = $rule->getConditions();
-                $conditions->collectValidatedAttributes($collection);
-                $this->sqlBuilder->attachConditionToCollection($collection, $conditions);
-            }
-
-            if ($this->_stockConfig->isShowOutOfStock() != 1) {
-                $this->_stockFilter->addInStockFilterToCollection($collection);
-            }
-            $this->_eventManager->dispatch(
-                'catalog_block_product_list_collection',
-                ['collection' => $collection]
-            );
-
-        return $collection;
+        $parameters = $this->_parameters;
+        if($parameters){
+            $rule = $this->getRule($parameters);
+            $conditions = $rule->getConditions();
+            $conditions->collectValidatedAttributes($collection);
+            $this->sqlBuilder->attachConditionToCollection($collection, $conditions);
+        }
+        if ($this->_stockConfig->isShowOutOfStock() != 1) {
+            $this->_stockFilter->addInStockFilterToCollection($collection);
+        }
+        $this->_eventManager->dispatch(
+            'catalog_block_product_list_collection',
+            ['collection' => $collection]
+        );
+        $page = $this->getRequest()->getPost('p', 1);
+        return $collection->setCurPage($page);
     }
 
     protected function getRule($conditions)

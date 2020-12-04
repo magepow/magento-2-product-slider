@@ -19,8 +19,11 @@ use Magento\Framework\App\Action\Action;
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 $_aloHelper = $this->helper('Magiccart\Magicproduct\Helper\Alothemes');
+$nextPage = ($_productCollection->getCurPage() == $_productCollection->getLastPageNumber()) ? 0 : $_productCollection->getCurPage(+1);
 ?>
-<div class="mage-magictabs mc-<?php echo $this->escapeHtml($this->getTypeFilter());?>">
+<div class="mage-magictabs mc-<?php echo $this->escapeHtml($this->getTypeFilter());?>"
+    data-next-page="<?php /* @escapeNotVerified */ echo $nextPage ?>"
+    >
 <?php if (!$_productCollection->count()): ?>
     <div class="message info empty"><div><?php /* @escapeNotVerified */ echo __('We can\'t find products matching the selection.') ?></div></div>
 <?php else: ?>

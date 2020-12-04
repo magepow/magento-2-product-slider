@@ -183,7 +183,18 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'name' => 'ajax',
                 'options' => ['1' => __('Yes'), '0' => __('No')],
                 'value' => 1,
-                'after_element_html' => '<small>Use AJAX quick load site but not good for SEO</small>',
+                'after_element_html' => '<small>Use AJAX quick load site</small>',
+            ]
+        );
+
+        $fieldset->addField('loadmore', 'select',
+            [
+                'label' => __('Show load more'),
+                'title' => __('Show load more'),
+                'name' => 'loadmore',
+                'options' => ['0' => __('No'), '1' => __('Yes')],
+                'value' => 0,
+                'after_element_html' => '<small>Use AJAX load more items.</small>',
             ]
         );
 

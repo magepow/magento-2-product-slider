@@ -39,4 +39,10 @@ if($numTabs): ?>
 	>
 		<?php echo $this->getContent('category/grid.phtml'); ?>
 	</div>
+	<?php if($this->getData('loadmore')): ?>
+		<div class="action-more" style="display: none;">
+	        <span class="load-more"><?php echo __('Load more') ?></span>
+	        <span class="load-end"><?php echo __('Load end') ?></span>
+	    </div>
+    <?php endif ?>
 </div>

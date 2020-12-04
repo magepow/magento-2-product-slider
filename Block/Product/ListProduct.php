@@ -130,7 +130,8 @@ class ListProduct extends AbstractProduct implements IdentityInterface
             }
         }
 
-        return $this->_productCollection;
+        $page = $this->getRequest()->getPost('p', 1);
+        return $this->_productCollection->setCurPage($page);
     }
 
     /**
