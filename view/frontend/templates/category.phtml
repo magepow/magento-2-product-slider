@@ -41,7 +41,7 @@ if($numTabs): ?>
 	</div>
 	<?php if($this->getData('loadmore')): ?>
 		<div class="action-more" style="display: none;">
-	        <span class="load-more"><?php echo __('Load more') ?></span>
+	        <span class="load-more" data-loading="<?php echo __('Loading...') ?>" data-loaded="<?php echo __('Loaded') ?>"><?php echo __('Load more') ?></span>
 	        <span class="load-end"><?php echo __('Load end') ?></span>
 	    </div>
     <?php endif ?>

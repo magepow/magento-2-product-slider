@@ -20,9 +20,12 @@ define([
             classes  : '.product-item', // Selector product grid
             tabs 	 : '.magictabs',
             loading  : '.ajax_loading',
-            loadmore : '.action-more',
             product  : '.content-products',
             padding  : 15, // padding item
+            actionmore 				: '.action-more',
+			loadmoreSelector		: '.load-more',
+			loadendSelector			: '.load-end',
+			loadmoreDisabledClass	: 'disabled'
         };
 
         var settings = $.extend(defaults, options);
@@ -31,7 +34,7 @@ define([
         var product 	= settings.product;
         var $content 	= $(this);
         var $product 	= $(product, $content);
-        var loadmore 	= $(settings.loadmore, $content);
+        var actionmore 	= $(settings.actionmore, $content);
 		if( !$product.data( 'vertical') && $('body').hasClass('rtl') ){
 			$product.attr('dir', 'rtl');
 			$product.data( 'rtl', true );
@@ -114,7 +117,10 @@ define([
             },
 
             loadMore : function() {
-				$content.on("click", settings.loadmore + ' .load-more', function(){
+            	var loadmoreButton = actionmore.find(settings.loadmoreSelector);
+            	if(loadmoreButton.length) loadmoreButton.data('text', loadmoreButton.text());
+				$content.on("click", settings.actionmore + ' .load-more', function(){
+					if($(this).hasClass(settings.loadmoreDisabledClass)) return;
 					var $this = $tabs.find('.item.activated');
 					var type  = $this.data('type');
 					if(type == undefined) return;
@@ -125,6 +131,7 @@ define([
 						methods.loadMoreButton(nextPage);
 						if(nextPage < 2) return;
 						var info = $.extend(infotabs, { 'p' : nextPage});
+						methods.disableLoadmoreButton(actionmore);
 						methods.sendAjax(type, info, nextPage);
 					} 
 				});
@@ -132,16 +139,16 @@ define([
 
             loadMoreButton : function(nextPage=0){
             	if(nextPage){
-            		loadmore.show();
+            		actionmore.show();
             	}else {
-            		loadmore.hide();
+            		actionmore.hide();
             	}
             	if(nextPage > 1){
-					loadmore.find('.load-more').show();
-					loadmore.find('.load-end').hide();
+					actionmore.find(settings.loadmoreSelector).show();
+					actionmore.find(settings.loadendSelector).hide();
             	}else {
-					loadmore.find('.load-more').hide();
-					loadmore.find('.load-end').show();
+					actionmore.find(settings.loadmoreSelector).hide();
+					actionmore.find(settings.loadendSelector).show();
             	}
             },
 
@@ -207,6 +214,7 @@ define([
 							productsActivated.data('next-page', nextPage);
 							productsActivated.find('.products.items').append(productMore.find('.products.items').html());
 							nextPage++; // nextPage + 1 is ajax.
+							methods.enableLoadmoreButton(actionmore);
 						} else {
 							var productsActivated = products.append(data).find(typeClass).addClass('activated');
 						}
@@ -262,6 +270,24 @@ define([
 				// 	}
 				// });
 			},
+
+            disableLoadmoreButton: function () {
+                var loadmoreButton = actionmore.find(settings.loadmoreSelector);
+                loadmoreButton.text(loadmoreButton.data('loading'));
+                loadmoreButton.attr('title', loadmoreButton.data('loading'));
+            },
+
+            enableLoadmoreButton: function () {
+                var loadmoreButton = actionmore.find(settings.loadmoreSelector);
+                loadmoreButton.text(loadmoreButton.data('loaded'));
+                loadmoreButton.attr('title', loadmoreButton.data('loaded'));
+
+                setTimeout(function () {
+                    loadmoreButton.removeClass(settings.loadmoreDisabledClass);
+                    loadmoreButton.text(loadmoreButton.data('text'));
+                    loadmoreButton.attr('title', loadmoreButton.data('text'));
+                }, 1000);
+            }
 
         };
 
