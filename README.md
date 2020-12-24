@@ -1,6 +1,10 @@
 # Magento 2 Product Slider - Magicproduct extension
 **Product Slider Magento extension** (Magicproduct Extension) is an important extension that helps you show a list of products as a slider on any live store pages such as homepage, category page, product page, checkout page…By using this extension, you don’t have to create and add a lot of bestsellers, onsale products, featured products,... manually, your live store still attracts more customers. Magento Product Slider will help customers see the brief of product information, rate and share them, add them to wishlist, cart…quickly. If you are looking for an extension to highlight a group of products and improve customer experience, Magento Product Slider is one of the must-have items.
 
+[![Latest Stable Version](https://poser.pugx.org/magiccart/magicproduct/v/stable)](https://packagist.org/packages/magiccart/magicproduct)
+[![Total Downloads](https://poser.pugx.org/magiccart/magicproduct/downloads)](https://packagist.org/packages/magiccart/magicproduct)
+[![Daily Downloads](https://poser.pugx.org/magiccart/magicproduct/d/daily)](https://packagist.org/packages/magiccart/magicproduct)
+
 ## Highlight Features
 - Easy to Disable/Enable the Slider
 - Display Best Sellers, OnSale Products, Featured products, Newest products, Recently viewed products, Random Products or even a group of products as you want
@@ -96,6 +100,3 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 * [Customization Service](https://magepow.com/customization-service.html)
 
 * [Hire Magento Developer](https://magepow.com/hire-magento-developer.html)
-
-[![Latest Stable Version](https://poser.pugx.org/magiccart/magicproduct/v/stable)](https://packagist.org/packages/magiccart/magicproduct)
-[![Total Downloads](https://poser.pugx.org/magiccart/magicproduct/downloads)](https://packagist.org/packages/magiccart/magicproduct)
