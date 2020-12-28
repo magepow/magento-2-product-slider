@@ -1,23 +1,58 @@
-# Magento 2 Product Slider - Magicproduct extension
-**Product Slider Magento extension** (Magicproduct Extension) is an important extension that helps you show a list of products as a slider on any live store pages such as homepage, category page, product page, checkout page…By using this extension, you don’t have to create and add a lot of bestsellers, onsale products, featured products,... manually, your live store still attracts more customers. Magento Product Slider will help customers see the brief of product information, rate and share them, add them to wishlist, cart…quickly. If you are looking for an extension to highlight a group of products and improve customer experience, Magento Product Slider is one of the must-have items.
+## Magento 2 Product Slider - Magic product slider extension
+** Magento 2 Product Extension (Magic product slider extension) ** is an important module that helps you to display product lists as sliders on any live store page like page Homepage, category page, product page, payment page ...
+
+By using this extension, you don't have to manually create and add multiple bestsellers, discount products, featured products, etc. It doesn't take too long, your direct store will still attract more customers. Magento 2 Product Slider will help customers view summaries of product information, rate and share them, add them to a favorites list, cart… quickly. If you're looking for an extension to highlight a set of products and improve customer experience, then the Product Slider extension is one of the must-have items.
+
+With a system rich in features, the utility brings a beautiful interface and professional customization capabilities to your Magento store. Administrators can apply Product Slider to support advertising programs, promoting new products according to the business strategy of the business. This extension helps improve customer experience, increase product conversions, and thereby increase sales for your business.
+
+
 
 [![Latest Stable Version](https://poser.pugx.org/magiccart/magicproduct/v/stable)](https://packagist.org/packages/magiccart/magicproduct)
 [![Total Downloads](https://poser.pugx.org/magiccart/magicproduct/downloads)](https://packagist.org/packages/magiccart/magicproduct)
 [![Daily Downloads](https://poser.pugx.org/magiccart/magicproduct/d/daily)](https://packagist.org/packages/magiccart/magicproduct)
 
-## Highlight Features
+### Highlight Features
 - Easy to Disable/Enable the Slider
-- Display Best Sellers, OnSale Products, Featured products, Newest products, Recently viewed products, Random Products or even a group of products as you want
-- Easy and quick to insert products slider on page/ block by using widget options
+
+- Beautiful interface with a variety of sliders:
+1: Display Best Sellers, OnSale Products, Featured products, Newest products, Recently viewed products, Random Products or even a group of products as you want
+
+2: Independent display of 1 item per row
+
+3: Multi-tabs and Multi-row
+
+5. Select products from the store's product categories
+
+6: The products slider with countdown timer
+
+7: Mix different types of products on the same slider
+
+- Easy and quick to insert products slider on-page/ block by using widget options
+
+- Display summary of product information (name, price), rate, add to cart button, add to wishlist, share product,...
+
+- Unlimited number of sliders and number of products displayed
+
 - Place Slider any pages in your store
-- Responsive sliders
+
 - Set up the number of products and the row displayed for each slider
+
 - Slider effects included
+
 - Allow pick up products for sliders from whole store/ many categories/ one category
-- Special Sliders with countdown timer
 
+- Responsive sliders. Compatible with many devices: phones, laptops, tablets…
 
-### ✓ Install Magiccart Magicproduct via composer (recommend)
+-Easy to install and customize
+
+- Open source compatible
+
+- Support quickly
+
+## How to use Magic Product Slider extension for Magento 2
+### How to install Product Slider
+
+#### ✓ Install Magiccart Magicproduct via composer (recommend)
 Run the following command in Magento 2 root folder:
 
 ```
@@ -28,6 +63,9 @@ php bin/magento setup:static-content:deploy -f
 
 ## Magiccart Magicproduct user guide
 [USE GUIDE](https://docs.alothemes.com/m2/extension/productslider/)
+[DEMO FRONTEND](http://demo.magepow.com/magicproduct/)
+[DEMO BACKEND](http://demo.magepow.com/magicproduct/admin)
+[SUPPORT](https://magepow.com/magento-2-product-slider.html)
 
 ## Donation
 
