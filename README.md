@@ -1,5 +1,5 @@
 ## Magento 2 Product Slider - Magic product slider extension
-** Magento 2 Product Extension (Magic product slider extension) ** is an important module that helps you to display product lists as sliders on any live store page like page Homepage, category page, product page, payment page ...
+**Magento 2 Product Extension (Magic product slider extension)** is an important module that helps you to display product lists as sliders on any live store page like page Homepage, category page, product page, payment page ...
 
 By using this extension, you don't have to manually create and add multiple bestsellers, discount products, featured products, etc. It doesn't take too long, your direct store will still attract more customers. Magento 2 Product Slider will help customers view summaries of product information, rate and share them, add them to a favorites list, cart… quickly. If you're looking for an extension to highlight a set of products and improve customer experience, then the Product Slider extension is one of the must-have items.
 
@@ -63,8 +63,11 @@ php bin/magento setup:static-content:deploy -f
 
 ## Magiccart Magicproduct user guide
 [USE GUIDE](https://docs.alothemes.com/m2/extension/productslider/)
+
 [DEMO FRONTEND](http://demo.magepow.com/magicproduct/)
+
 [DEMO BACKEND](http://demo.magepow.com/magicproduct/admin)
+
 [SUPPORT](https://magepow.com/magento-2-product-slider.html)
 
 ## Donation
