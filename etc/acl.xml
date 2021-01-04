@@ -6,7 +6,7 @@
  * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-02-23 18:59:34
- * @@Modify Date: 2016-03-29 23:20:30
+ * @@Modify Date: 2021-01-04 23:20:30
  * @@Function:
  */ -->
  
@@ -18,7 +18,7 @@
 	        	    <resource id="Magiccart_Magicproduct::magicproduct" title="Magic Product" sortOrder="10">
 	        	        <resource id="Magiccart_Magicproduct::magicproduct_product" title="Products" sortOrder="10" />
 	        	        <resource id="Magiccart_Magicproduct::magicproduct_category" title="Categoires" sortOrder="20" />
-	        	        <resource id="Magiccart_Magicproduct::magicproduct_miscellaneous" title="Miscellaneous" sortOrder="30" />
+	        	        <resource id="Magiccart_Magicproduct::magicproduct_catalog" title="Catalog" sortOrder="30" />
 	        	    </resource>
 	        	</resource>
 	            <resource id="Magento_Backend::stores">
