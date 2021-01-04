@@ -17,15 +17,29 @@ With a system rich in features, the utility brings a beautiful interface and pro
 - Beautiful interface with a variety of sliders:
 1: Display Best Sellers, OnSale Products, Featured products, Newest products, Recently viewed products, Random Products or even a group of products as you want
 
+![Image of magento 2 product slider-features](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-magic-product-featured-slider.png?raw=true)
+
 2: Independent display of 1 item per row
+
+![Image of magento 2 layered navigation muilt select](https://github.com/magepow/magento2-layered-navigation/blob/master/media/magento2-layered-navigation-muilt-select.png?raw=true)
 
 3: Multi-tabs and Multi-row
 
+![Image of magento2-product-slider-multiple-rows](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-product-slider-multiple-rows.png?raw=true)
+
+![Image of magento2-products-slider-with-multi-tabs](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-products-slider-with-multi-tabs.png?raw=true)
+
 5: Select products from the store's product categories
+
+![Image of magento2-product-slider-random](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-product-slider-random.png?raw=true)
 
 6: The products slider with countdown timer
 
+![Image of magento2-products-slider-countdown-timer](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-products-slider-countdown-timer.png?raw=true)
+
 7: Mix different types of products on the same slider
+
+![Image of magento2-product-slider-mixed](https://github.com/magiccart/magento2-product-slider/blob/master/media/magento2-product-slider-mixed.png?raw=true)
 
 - Easy and quick to insert products slider on-page/ block by using widget options
 
