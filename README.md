@@ -21,7 +21,7 @@ With a system rich in features, the utility brings a beautiful interface and pro
 
 3: Multi-tabs and Multi-row
 
-5. Select products from the store's product categories
+5: Select products from the store's product categories
 
 6: The products slider with countdown timer
 
@@ -43,7 +43,7 @@ With a system rich in features, the utility brings a beautiful interface and pro
 
 - Responsive sliders. Compatible with many devices: phones, laptops, tablets…
 
--Easy to install and customize
+- Easy to install and customize
 
 - Open source compatible
 
