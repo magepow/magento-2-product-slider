@@ -5,7 +5,7 @@
  * @license 	http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2014-04-25 13:16:48
- * @@Modify Date: 2020-05-18 11:08:12
+ * @@Modify Date: 2021-02-02 11:08:12
  * @@Function:
  */
 
@@ -76,15 +76,21 @@ define([
 					var typeClass = '.mc-'+type;
 					if($this.hasClass('activated')){
 						var productsActivated = $product.find(typeClass).addClass('activated');
-						var nextPage = productsActivated.data('next-page');
-						methods.loadMoreButton(nextPage);
-						if(options.slidesToShow){
-							var float  = $('body').hasClass('rtl') ? 'right' : 'left';
-							$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
-							methods.productSlider(options, productsActivated.find('.products-grid .items'));
-						} else{
-							isGrid = true;
-							methods.productGrid(options);
+						if ("IntersectionObserver" in window) {
+							let productsObserver = new IntersectionObserver(function(entries, observer) {
+								entries.forEach(function(entry) {
+									if (entry.isIntersecting) {
+										// let el = entry.target;
+										methods.gridSlider(productsActivated);
+										productsObserver.unobserve(entry.target);
+									}
+								});
+							});
+						    productsActivated.each(function(){
+						    	productsObserver.observe(this);
+						    });
+						} else {
+							methods.gridSlider(productsActivated);
 						}
 					}
 				});
@@ -114,6 +120,19 @@ define([
 						}
 				});
 				methods.loadMore();
+            },
+
+            gridSlider : function(productsActivated) {
+				var nextPage = productsActivated.data('next-page');
+				methods.loadMoreButton(nextPage);
+				if(options.slidesToShow){
+					var float  = $('body').hasClass('rtl') ? 'right' : 'left';
+					$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
+					methods.productSlider(options, productsActivated.find('.products-grid .items'));
+				} else{
+					isGrid = true;
+					methods.productGrid(options);
+				}
             },
 
             loadMore : function() {
