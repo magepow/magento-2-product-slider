@@ -12,6 +12,7 @@
  ?>
 <?php if(!$this->getStatus()) return; ?>
 <?php $selector = 'alo-content-'.uniqid(); ?>
+<?php /* echo $this->getGridStyle( '.' . $selector . ' .products-grid .product-item' ) */ ?>
 <div class= "<?php /* @escapeNotVerified */ echo $selector?> magicproduct product autoplay">
 <?php
 $tabs = $this->getTabs();

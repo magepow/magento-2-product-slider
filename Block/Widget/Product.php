@@ -244,7 +244,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     function getGridStyle($selector=' .products-grid .product-item')
     {
-        $styles = '';
+        $styles  = $selector . '{float: left}';
         $listCfg = $this->getData();
         $padding = $listCfg['padding'];
         $prcents = $this->getPrcents();
