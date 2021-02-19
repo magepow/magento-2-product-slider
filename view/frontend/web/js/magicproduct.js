@@ -77,13 +77,13 @@ define([
 					if($this.hasClass('activated')){
 						var productsActivated = $product.find(typeClass);
 						if ("IntersectionObserver" in window) {
-							productsActivated.css('visibility','hidden').trigger('processStart');
+							productsActivated.css('visibility','hidden');
 							let productsObserver = new IntersectionObserver(function(entries, observer) {
 								entries.forEach(function(entry) {
 									if (entry.isIntersecting) {
 										// let el = entry.target;
 										setTimeout(function() {
-									        productsActivated.trigger('processStart').css('visibility','visible').fadeIn('slow');
+									        productsActivated.css('visibility','visible').fadeIn('slow');
 									    }, 50);
 										methods.gridSlider(productsActivated);
 										productsObserver.unobserve(entry.target);
