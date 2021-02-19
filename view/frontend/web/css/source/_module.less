@@ -1,13 +1,11 @@
-.magictabs .item.activated, .magictabs .item:hover {
-	border-color : #ff3366;
-}
-.content-products .mage-magictabs {
-	display: none;
-	/*visibility: hidden;*/
-	/*opacity: 0;*/
-}
-.content-products .mage-magictabs.activated {
-	display: block;
-	/*visibility: visible;*/
-	/*opacity: 1;*/
+& when (@media-common = true) {
+	.magictabs .item.activated, .magictabs .item:hover {
+		border-color : #ff3366;
+	}
+	.content-products .mage-magictabs {
+		display: none;
+	}
+	.content-products .mage-magictabs.activated {
+		display: block;
+	}
 }
