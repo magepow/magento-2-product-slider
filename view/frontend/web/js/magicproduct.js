@@ -84,9 +84,6 @@ define([
 								entries.forEach(function(entry) {
 									if (entry.isIntersecting) {
 										// let el = entry.target;
-										productItems.on('init', function(event, slick){
-						                	productItem.show();
-						                });
 										methods.gridSlider(productsActivated);
 										productsObserver.unobserve(entry.target);
 									}
