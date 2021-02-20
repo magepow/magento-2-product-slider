@@ -75,16 +75,18 @@ define([
 					var type = $this.data('type');
 					var typeClass = '.mc-'+type;
 					if($this.hasClass('activated')){
-						var productsActivated = $product.find(typeClass);
+						var productsActivated = $product.find(typeClass).addClass('activated');
 						if ("IntersectionObserver" in window) {
-							productsActivated.css('visibility','hidden');
+							var productItems = productsActivated.find('.product-items');
+							var productItem  = productItems.find('.product-item');
+							productItem.hide();
 							let productsObserver = new IntersectionObserver(function(entries, observer) {
 								entries.forEach(function(entry) {
 									if (entry.isIntersecting) {
 										// let el = entry.target;
-										setTimeout(function() {
-									        productsActivated.css('visibility','visible').fadeIn('slow');
-									    }, 50);
+										productItems.on('init', function(event, slick){
+						                	productItem.show();
+						                });
 										methods.gridSlider(productsActivated);
 										productsObserver.unobserve(entry.target);
 									}
@@ -96,9 +98,6 @@ define([
 						} else {
 							methods.gridSlider(productsActivated);
 						}
-						setTimeout(function() {
-					        productsActivated.addClass('activated');
-					    }, 50);
 					}
 				});
 
