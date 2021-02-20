@@ -77,13 +77,14 @@ define([
 					if($this.hasClass('activated')){
 						var productsActivated = $product.find(typeClass).addClass('activated');
 						if ("IntersectionObserver" in window) {
-							var productItems = productsActivated.find('.product-items');
-							var productItem  = productItems.find('.product-item');
-							productItem.hide();
+							var style 	= methods.getStyleCLS(options);
+							var styleId = selector.replaceAll('.' , '_');
+							$head.append('<style type="text/css" id="' + styleId +  '" >'+style+'</style>');
 							let productsObserver = new IntersectionObserver(function(entries, observer) {
 								entries.forEach(function(entry) {
 									if (entry.isIntersecting) {
 										// let el = entry.target;
+						                $head.find('#' + styleId).remove();
 										methods.gridSlider(productsActivated);
 										productsObserver.unobserve(entry.target);
 									}
@@ -123,6 +124,26 @@ define([
 						}
 				});
 				methods.loadMore();
+            },
+
+            getStyleCLS : function (options) {
+            	if(!options.slidesToShow) return;
+            	var style 		= '';
+            	var padding 	= options.padding;
+				var responsive 	= options.responsive;
+				var length = Object.keys(responsive).length;
+				var nthChild =  options.slidesToShow + 1;
+				style += selector + ' .content-products .item:nth-child(n+ ' + nthChild + ')' + '{display: none;} ' + selector +  ' .item{float:left};';
+				var gridResponsive = [];
+				$.each( responsive, function( key, value ) { 
+					var breakpoint = {};
+					breakpoint[value.breakpoint] = value.settings.slidesToShow;
+					gridResponsive.push(breakpoint);
+				 });
+				var girdOptions = Object.assign({}, options);
+				girdOptions.responsive  = gridResponsive.reverse();
+				style += methods.productGrid(girdOptions, true);
+				return style;
             },
 
             gridSlider : function(productsActivated) {
@@ -185,7 +206,7 @@ define([
 				}
             }, 
 
-            productGrid : function(options) {
+            productGrid : function(options, returnStyle=false) {
             	if(style) return;
             	var padding 	= options.padding;
 				var responsive 	= options.responsive;
@@ -210,8 +231,9 @@ define([
 					style += ' {'+selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}'+classes+'{padding-left: '+padding+'px; padding-right:'+padding+'px; width: '+(Math.floor((10/col) * 100000000000) / 10000000000)+'%} '+classes+':nth-child('+col+'n+1){clear: ' + float + ';}}';
 				});
 
-				$head.append('<style type="text/css">'+style+'</style>');
+				if(returnStyle) return style;
 
+				$head.append('<style type="text/css">'+style+'</style>');
             },
 
             sendAjax : function(type, infotabs, nextPage=1) {
@@ -243,7 +265,7 @@ define([
 						methods.loadMoreButton(nextPage); 
 						productsActivated.trigger('contentUpdated');
 						productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
-						productsActivated = productsActivated.find('.products-grid .items');
+						productsActivated = productsActivated.find('.product-items');
 						$itemtabs.each(function(){
 							if($(this).data('type') == type) $(this).addClass('loaded');
 						});
