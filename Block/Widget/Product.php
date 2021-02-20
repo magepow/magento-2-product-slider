@@ -105,6 +105,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
             $data['vertical-Swiping'] = $data['vertical'];
             if(!isset($data['fade'])) $data['fade'] = 'false';
             if(!isset($data['center-Mode'])) $data['center-Mode'] = 'false';
+            if(!isset($data['rows'])  || $data['rows'] == 1 ) $data['rows'] = 0;
         }
         $data['jnit_widget'] =1 ;
         if(is_array($data)) $this->addData($data);
