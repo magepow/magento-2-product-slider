@@ -137,7 +137,7 @@ define([
 				var gridResponsive = [];
 				$.each( responsive, function( key, value ) { 
 					var breakpoint = {};
-					breakpoint[value.breakpoint] = value.settings.slidesToShow;
+					breakpoint[value.breakpoint] = parseInt(value.settings.slidesToShow);
 					gridResponsive.push(breakpoint);
 				 });
 				var girdOptions = Object.assign({}, options);
