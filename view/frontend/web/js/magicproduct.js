@@ -5,7 +5,7 @@
  * @license 	http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2014-04-25 13:16:48
- * @@Modify Date: 2021-02-02 11:08:12
+ * @@Modify Date: 2021-02-25 11:08:12
  * @@Function:
  */
 
@@ -199,12 +199,26 @@ define([
 				if(el.hasClass('slick-initialized')) el.slick("refresh"); // slide.resize(); // $(window).trigger('resize');
 				else{ // var selector = $content.selector; // '.' + $content.attr('class').trim().replace(/ /g , '.');
 					if( !options.vertical && $('body').hasClass('rtl') ) el.attr('dir', 'rtl');
+					var galleryPlaceholder = el.find('.gallery-placeholder.autoplay');
                     el.on('init', function(event, slick){
                         $('body').trigger('contentUpdated');
+                 		if(galleryPlaceholder.length) methods.gallerySlider(galleryPlaceholder);
                     });
 					el.slick(options);
 				}
             }, 
+
+            gallerySlider : function(el) {
+                el.each(function() {
+	                var gallery = $(this).find('.gallery-items');
+	                if(gallery.hasClass('slick-initialized')) return;
+	                var nav     = $(this).find('.slider-nav');
+	                var galleryConfig = $.extend(gallery.data(), {'asNavFor': nav});
+	                var navConfig 	  = $.extend(nav.data(), {'asNavFor': gallery});
+	                gallery.slick(galleryConfig);
+	                nav.slick(navConfig);
+	            }); 
+            },
 
             productGrid : function(options, returnStyle=false) {
             	if(style) return;

@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+<?php
+    $gallery  = json_decode( $block->getGalleryImagesJson(), true );
+    $thumbs_html = '<div class="slider-nav" data-slides-To-Show="3" data-slides-To-Scroll="1" data-arrows="true" data-infinite="false" data-cente-Mode="true" data-focus-On-Select="true" >';
+    $selector = 'gallery-' . uniqid();
+?>
+<div class="<?php echo $selector ?> gallery-placeholder autoplay" data-slides-To-Show="1" data-slides-To-Scroll="1" data-arrows="true" data-fade="true" data-infinite="false">
+    <div class="gallery-items">
+        <?php foreach ($gallery as $shot) : ?>
+        	<?php $thumbs_html .= '<div class="fotorama__stage"><div class="fotorama__active"><img src="'. $shot['thumb'] .  '" alt="' . $shot['caption'] . '"></div></div>'; ?>
+            <div class="fotorama__stage"><div class="fotorama__active"><img src="<?php echo $shot['img'] ?>"  data-src="<?php echo $shot['full'] ?>" alt="<?php echo $shot['caption'] ?>"></div></div>
+        <?php endforeach ?>
+    </div>
+    <?php $thumbs_html .= '</div>'; ?>
+    <?php echo $thumbs_html ?>
+</div>
