@@ -279,7 +279,7 @@ define([
 						methods.loadMoreButton(nextPage); 
 						productsActivated.trigger('contentUpdated');
 						productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
-						productsActivated = productsActivated.find('.product-items');
+						productsActivated = productsActivated.find('.products.items');
 						$itemtabs.each(function(){
 							if($(this).data('type') == type) $(this).addClass('loaded');
 						});
