@@ -118,7 +118,7 @@ define([
 							var nextPage = productsActivated.data('next-page');
 							methods.loadMoreButton(nextPage);
 							productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
-							productsActivated = productsActivated.find('.products-grid .items');
+							productsActivated = productsActivated.find('.products.items');
 							if(isGrid) methods.playAnimate(productsActivated); //require for Animate
 							else  methods.productSlider(options, productsActivated);
 						}
@@ -152,7 +152,7 @@ define([
 				if(options.slidesToShow){
 					var float  = $('body').hasClass('rtl') ? 'right' : 'left';
 					$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
-					methods.productSlider(options, productsActivated.find('.products-grid .items'));
+					methods.productSlider(options, productsActivated.find('.products.items'));
 				} else{
 					isGrid = true;
 					methods.productGrid(options);
