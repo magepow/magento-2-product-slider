@@ -78,7 +78,7 @@ define([
 						var productsActivated = $product.find(typeClass).addClass('activated');
 						if ("IntersectionObserver" in window) {
 							var style 	= methods.getStyleCLS(options);
-							var styleId = selector.replaceAll('.' , '_');
+							var styleId = selector.replace(/[.]/g, '_');
 							$head.append('<style type="text/css" id="' + styleId +  '" >'+style+'</style>');
 							let productsObserver = new IntersectionObserver(function(entries, observer) {
 								entries.forEach(function(entry) {
