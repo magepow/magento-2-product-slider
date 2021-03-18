@@ -80,8 +80,9 @@ class Catalog extends Product
         return $categories;
     }
 
-    public function getContent($template)
+    public function getContent($template='')
     {
+        if($template) $this->setTemplateProduct($template); 
         $content = '';   
         $tabs = ($this->getAjax()) ? $tabs = array($this->getTabActivated() => 'Activated') : $this->getTabs();
         foreach ($tabs as $type => $name) {

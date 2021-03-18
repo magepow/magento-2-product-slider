@@ -35,7 +35,10 @@ class Product extends \Magiccart\Magicproduct\Controller\Index
 	        // $this->getResponse()->setBody( $products );
 	        $block = $info['timer'] ? 'GridProduct.timer':'GridProduct';
 		 	$response = $this->_view->getLayout()->getBlock($block);
-		 	if($response) $response = $response->setCfg($info)->setActivated($type)->toHtml();
+		 	if($response){
+		 		if(isset($info['template']) && $info['template']) $response->setTemplate($info['template']);
+		 		$response = $response->setCfg($info)->setActivated($type)->toHtml();
+		 	}
 		    $this->getResponse()->setBody($response);
 	    }else {
 	        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

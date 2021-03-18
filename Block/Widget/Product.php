@@ -165,9 +165,15 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
         return $activated;
     }
 
-    public function getContent($template)
+    public function setTemplateProduct($template)
     {
-        $content = '';    
+        $this->setData('template_product', $template);
+    }
+
+    public function getContent($template='')
+    {
+        if($template) $this->setTemplateProduct($template);
+        $content = '';
         $tabs = ($this->getAjax()) ? $tabs = array($this->getTabActivated() => 'Activated') : $this->getTabs();
         foreach ($tabs as $type => $name) {
             $content .= $this->getLayout()->createBlock('Magiccart\Magicproduct\Block\Product\GridProduct') // , "magicproduct.product.$type"
@@ -186,6 +192,8 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
         foreach ($this->_options as $option) {
             $ajax[$option] = $this->getData($option);
         }
+        $template = $this->getTemplateProduct();
+        if($template) $ajax['template'] = $template;
         if($this->getData('parameters')) $ajax['identifier'] =  $this->getIdentifier();
         return json_encode($ajax);
     }
