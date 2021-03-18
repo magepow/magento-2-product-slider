@@ -251,6 +251,7 @@ define([
             },
 
             sendAjax : function(type, infotabs, nextPage=1) {
+            	$content.addClass('loading');
 				$loading.show();
 				$.ajax({
 					type: 'post',
@@ -258,6 +259,7 @@ define([
 					url : $loading.data('url'),
 					success:function(data){
 						$loading.hide();
+						$content.removeClass('loading');
 						// banner tab
 						$content.find('.category-banner').slideUp(500).removeClass('activated');
 						$content.find('.banner-'+ type ).slideDown(500).addClass('activated');
