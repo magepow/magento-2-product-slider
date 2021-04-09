@@ -95,8 +95,10 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
             $total = count($breakpoints);
             $responsive = '[';
             foreach ($breakpoints as $size => $screen) {
-                $responsive .=  isset($data[$screen]) ? '{"breakpoint": '.$size.', "settings": {"slidesToShow": '. $data[$screen] .'}}' : '';
-                if($total-- > 1) $responsive .= ', ';
+                $total--;
+                if(!isset($data[$screen])) continue;
+                $responsive .= '{"breakpoint": '.$size.', "settings": {"slidesToShow": '. $data[$screen] .'}}';
+                if($total > 0) $responsive .= ', ';
             }
             $responsive .= ']';
             $data['responsive'] = $responsive;
