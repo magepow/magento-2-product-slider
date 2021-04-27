@@ -475,7 +475,12 @@ $collection->joinField(
 
     public function getCategory($categoryId)
     {
-        return $this->categoryRepository->get($categoryId);
+        try {
+            $category = $this->categoryRepository->get($categoryId);
+        } catch (\Exception $e) {
+            return;
+        }
+        return $category;
     }
 
 }
