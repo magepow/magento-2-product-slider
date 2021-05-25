@@ -18,17 +18,21 @@ $tabs = $this->getTabs();
 $numTabs = count($tabs);
 if($numTabs): ?>
     <div class="block-title-tabs">
-	<ul class="magictabs" data-ajax ='<?php /* @escapeNotVerified */ echo $this->getAjaxCfg() ?>'>
-	<?php $activated = $this->getTabActivated();
-		$limit = $this->getLimit();
-		$single = ($numTabs ==1) ? 'single' : '';
-		foreach ($tabs as $type => $name):
-			$status  = (!$this->getAjax() || $activated ==$type) ? 'loaded' : '';
-			$status .= ($type == $activated) ? " activated $single" : '';
-			/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
-		endforeach;
-	?>
-	</ul>
+		<div class="cms-title">
+			<?php echo $this->getTitle() ? '<h2 class="title">' . __($this->getTitle()) . '</h2>' : ''; ?>
+			<?php echo $this->getSubtitle() ? '<p class="sub-title text">' . $this->getSubtitle().'</p>' : ''; ?>
+		</div>
+		<ul class="magictabs" data-ajax ='<?php /* @escapeNotVerified */ echo $this->getAjaxCfg() ?>'>
+		<?php $activated = $this->getTabActivated();
+			$limit = $this->getLimit();
+			$single = ($numTabs ==1) ? 'single' : '';
+			foreach ($tabs as $type => $name):
+				$status  = (!$this->getAjax() || $activated ==$type) ? 'loaded' : '';
+				$status .= ($type == $activated) ? " activated $single" : '';
+				/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
+			endforeach;
+		?>
+		</ul>
     </div>
 <?php endif ?>
 	<div class="ajax_loading" style="display:none" data-url="<?php /* @escapeNotVerified */ echo $this->getUrl('magicproduct/index/category', array('_secure'=>$this->getRequest()->isSecure()))?>"></div>

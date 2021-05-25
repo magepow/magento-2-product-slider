@@ -6,7 +6,7 @@
  * @license     http://www.magiccart.net/license-agreement.html
  * @Author: DOng NGuyen<nguyen@dvn.com>
  * @@Create Date: 2016-01-11 23:15:05
- * @@Modify Date: 2016-03-29 21:27:15
+ * @@Modify Date: 2021-05-25 21:27:15
  * @@Function:
  */
 
@@ -31,7 +31,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
 		$magicproducts = $this->_magicproduct->getCollection()->addFieldToFilter('type_id', '2');
 		$options = array();
 		foreach ($magicproducts as $item) {
-			$options[$item->getIdentifier()] = $item->getTitle();
+			$options[$item->getIdentifier()] = $item->getTitle() ? $item->getTitle() : $item->getIdentifier();
 		}
         return $options;
     }

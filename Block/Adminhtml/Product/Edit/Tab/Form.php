@@ -131,7 +131,17 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic implements \Magent
                 'label' => __('Title'),
                 'title' => __('Title'),
                 'name'  => 'title',
-                'required' => true,
+                'required' => false,
+            ]
+        );
+
+        $fieldset->addField('subtitle', 'text',
+            [
+                'label' => __('Sub Title'),
+                'title' => __('Sub Title'),
+                'name'  => 'subtitle',
+                'required' => false,
+                'after_element_html' => '<small>Small text below title</small>',
             ]
         );
 

@@ -22,20 +22,24 @@ $banner = $this->getBanner();
 /* @escapeNotVerified */ echo '<h3 class="title">'.$this->getCatName().'</h3>';
 if($numTabs): ?>
     <div class="block-title-tabs">
-	<ul class="magictabs" data-ajax ='<?php /* @escapeNotVerified */ echo $this->getAjaxCfg() ?>'>
-	<?php $activated = $this->getTabActivated();
-		$limit = $this->getLimit();
-		$single = ($numTabs ==1) ? 'single' : '';
-		foreach ($tabs as $type => $name):
-			$status  = (!$isAjax || $activated ==$type) ? 'loaded' : '';
-			$status .= ($type == $activated) ? " activated $single" : '';
-			/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
-		endforeach;
-		foreach ($relatedTabs as $cat):
-			/* @escapeNotVerified */ echo $isAjax ? '<li class="item cat" data-type ="'.$cat->getEntityId().'"><span class ="title">'.$cat->getName().'</span></li>' : '<li class="item cat" data-type ="'.$cat->getEntityId().'"><a href="'.$cat->getUrl().'"><span class ="title">'.$cat->getName().'</span></a></li>';
-		endforeach;
-	?>
-	</ul>
+		<div class="cms-title">
+			<?php echo $this->getTitle() ? '<h2 class="title">' . __($this->getTitle()) . '</h2>' : ''; ?>
+			<?php echo $this->getSubtitle() ? '<p class="sub-title text">' . $this->getSubtitle().'</p>' : ''; ?>
+		</div>
+		<ul class="magictabs" data-ajax ='<?php /* @escapeNotVerified */ echo $this->getAjaxCfg() ?>'>
+		<?php $activated = $this->getTabActivated();
+			$limit = $this->getLimit();
+			$single = ($numTabs ==1) ? 'single' : '';
+			foreach ($tabs as $type => $name):
+				$status  = (!$isAjax || $activated ==$type) ? 'loaded' : '';
+				$status .= ($type == $activated) ? " activated $single" : '';
+				/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
+			endforeach;
+			foreach ($relatedTabs as $cat):
+				/* @escapeNotVerified */ echo $isAjax ? '<li class="item cat" data-type ="'.$cat->getEntityId().'"><span class ="title">'.$cat->getName().'</span></li>' : '<li class="item cat" data-type ="'.$cat->getEntityId().'"><a href="'.$cat->getUrl().'"><span class ="title">'.$cat->getName().'</span></a></li>';
+			endforeach;
+		?>
+		</ul>
     </div>
 <?php endif ?>
 	<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($this->getIdentifier())->toHtml();?>
