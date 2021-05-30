@@ -148,15 +148,17 @@ define([
 
             gridSlider : function(productsActivated) {
 				var nextPage = productsActivated.data('next-page');
+				var products = productsActivated.find('.products.items');
 				methods.loadMoreButton(nextPage);
 				if(options.slidesToShow){
 					var float  = $('body').hasClass('rtl') ? 'right' : 'left';
 					$head.append('<style type="text/css">' + classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}</style>');
-					methods.productSlider(options, productsActivated.find('.products.items'));
+					methods.productSlider(options, products);
 				} else{
 					isGrid = true;
 					methods.productGrid(options);
 				}
+				products.addClass('grid-init');
             },
 
             loadMore : function() {
