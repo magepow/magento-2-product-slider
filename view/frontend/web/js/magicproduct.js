@@ -228,7 +228,7 @@ define([
 				var responsive 	= options.responsive;
 				var length = Object.keys(responsive).length;
 				var float  = $('body').hasClass('rtl') ? 'right' : 'left';
-				style += padding ? classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}' : '';
+				style += (typeof padding !== 'undefined') ? classes + '{float: ' + float + '; padding-left: '+padding+'px; padding-right:'+padding+'px} ' + selector + ' .content-products' + '{margin-left: -'+padding+'px; margin-right: -'+padding+'px}' : '';
 				
 				$.each( responsive, function( key, value ) { // data-responsive="[{"1":"1"},{"361":"1"},{"480":"2"},{"640":"3"},{"768":"3"},{"992":"4"},{"1200":"4"}]"
 					var col = 0;
