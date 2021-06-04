@@ -11,7 +11,7 @@
 
 define([
     'jquery',
-    'magiccart/slick'
+    'slick'
     ], function ($) {
     "use strict";
     $.fn.magicproduct = function (options) {
