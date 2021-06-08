@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Framework\View\Element\Template
+ */
+?>
+<?php
+$_product = $block->getProduct();
+$_soldHelper = $this->helper('Magiccart\Magicproduct\Helper\Sold');
+$sold 	= $_soldHelper->getSoldQty($_product);
+$qty 	= $_soldHelper->getProductQty($_product);
+$total_sale = $qty + $sold;
+$percent = $qty > 0 ? round(($qty/$total_sale) * 100) : 0;
+?>
+<div class="product-deal-special-progress">
+	<div class="deal-stock-label">
+		<span class="stock-available text-left"><?php echo __('Available') ?>: <strong><?php echo $qty ?></strong></span>
+		<span class="stock-sold text-right"><?php echo __('Already Sold') ?>: <strong><?php echo $sold ?></strong></span>
+	</div>
+	<div class="deal-progress">
+		<span class="deal-progress-bar" style="width:<?php echo $percent ?>%"><?php echo $percent ?></span>
+	</div>
+</div>

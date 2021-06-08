@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Framework\View\Element\Template
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$_aloHelper = $this->helper('Magiccart\Magicproduct\Helper\Alothemes');
+$_soldHelper = $this->helper('Magiccart\Magicproduct\Helper\Sold');
+$timer = $_aloHelper->getTimer($_product);
+if(!$timer) return;
+?>
+<h3 class="slogan-countdown"><?php echo __('Hurry Up!') ?> <span><?php echo __('Special Offers.') ?></span></h3>
+<?php echo $timer; ?>
+<?php
+	echo $block->getLayout()->createBlock('Magento\Framework\View\Element\Template')
+					->setProduct($_product)
+					->setTemplate('Magiccart_Magicproduct::product/listing/sold.phtml');
+?>
