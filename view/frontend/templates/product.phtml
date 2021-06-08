@@ -14,6 +14,16 @@
 <?php $selector = 'alo-content-'.uniqid(); ?>
 <?php /* echo $this->getGridStyle( '.' . $selector . ' .products-grid .product-item' ) */ ?>
 <div class= "<?php /* @escapeNotVerified */ echo $selector?> magicproduct product autoplay">
+<?php 
+$timer  = $this->getData('countdown');
+$timer = $timer ?  date('n/d/Y', strtotime($timer)) : 0;
+if($timer) : 
+	?>
+	<div class="alo-count-down count-down-time">
+		<span class="icon-clock fa fa-clock-o"><span class="hidden">hidden</span></span>
+		<div class="countdown caption" data-timer="<?php /* @escapeNotVerified */ echo $timer ?>"></div>
+	</div>
+<?php endif ?>
 <?php
 $tabs = $this->getTabs();
 $numTabs = count($tabs);
