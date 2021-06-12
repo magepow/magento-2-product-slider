@@ -79,6 +79,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
         $this->_magicproduct = $this->magicproductFactory->create()->getCollection( $identifier, 'identifier')
                                     ->addFieldToFilter('identifier', $identifier)
                                     ->addFieldToFilter('type_id', $this->_typeId)
+                                    ->setPageSize(1)
                                     ->getFirstItem();
         if (!$this->_magicproduct){
             echo '<div class="message-error error message">Identifier "'. $identifier . '" not exist.</div> ';          

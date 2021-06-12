@@ -36,7 +36,8 @@ class Save extends \Magiccart\Magicproduct\Controller\Adminhtml\Action
             }else {
                 $check = $this->_magicproductFactory->create()->getCollection()
                             ->addFieldToFilter('type_id', '3')
-                            ->addFieldToFilter('identifier', $data['identifier']);
+                            ->addFieldToFilter('identifier', $data['identifier'])
+                            ->setPageSize(1);
                 if($check->count()){
                     $this->messageManager->addError(__('Identifier already exists.'));
                     $this->_getSession()->setFormData($data);
