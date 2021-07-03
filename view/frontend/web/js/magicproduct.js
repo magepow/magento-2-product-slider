@@ -214,11 +214,19 @@ define([
                 el.each(function() {
 	                var gallery = $(this).find('.gallery-items');
 	                if(gallery.hasClass('slick-initialized')) return;
-	                var nav     = $(this).find('.slider-nav');
-	                var galleryConfig = $.extend(gallery.data(), {'asNavFor': nav});
-	                var navConfig 	  = $.extend(nav.data(), {'asNavFor': gallery});
-	                gallery.slick(galleryConfig);
-	                nav.slick(navConfig);
+	                var nav        = $(this).find('.slider-nav');
+	                var galleryCfg = gallery.data();
+	                var navCfg 	   = nav.data();
+	                var isRTL 	   = false;
+	                if( !navCfg.vertical && $('body').hasClass('rtl') ){
+	                	gallery.attr('dir', 'rtl');
+	                	nav.attr('dir', 'rtl');
+	                	isRTL 	   = true;
+	                }
+	                var galleryCfg = $.extend(galleryCfg, {'asNavFor': nav, 'rtl': isRTL});
+	                var navCfg 	   = $.extend(navCfg, {'asNavFor': gallery, 'rtl': isRTL});
+	                gallery.slick(galleryCfg);
+	                nav.slick(navCfg);
 	            }); 
             },
 
