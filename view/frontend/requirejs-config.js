@@ -8,7 +8,7 @@ var config = {
 
 	shim: {
 		'magicproduct': {
-			deps: ['jquery', 'magiccart/slick']
+			deps: ['jquery', 'slick']
 		},
 
 	}
