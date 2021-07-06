@@ -1,0 +1,64 @@
+<?php
+/**
+ * Magiccart 
+ * @category 	Magiccart 
+ * @copyright 	Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license 	http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2016-01-08 22:57:12
+ * @@Modify Date: 2020-07-14 00:34:22
+ * @@Function:
+ */
+ ?>
+<?php if(!$this->getStatus()) return; ?>
+<?php $selector = 'alo-content-'.uniqid(); ?>
+<?php /* echo $this->getGridStyle( '.' . $selector . ' .products-grid .product-item' ) */ ?>
+<div class= "<?php /* @escapeNotVerified */ echo $selector?> magicproduct product autoplay">
+<?php 
+$timer  = $this->getData('countdown');
+$timer = $timer ?  date('n/d/Y', strtotime($timer)) : 0;
+if($timer) : 
+	?>
+	<div class="alo-count-down count-down-time">
+		<span class="icon-clock fa fa-clock-o"><span class="hidden">hidden</span></span>
+		<div class="countdown caption" data-timer="<?php /* @escapeNotVerified */ echo $timer ?>"></div>
+	</div>
+<?php endif ?>
+<?php
+$tabs = $this->getTabs();
+$numTabs = count($tabs);
+if($numTabs): ?>
+    <div class="block-title-tabs">
+		<div class="cms-title">
+			<?php echo $this->getTitle() ? '<h2 class="title">' . __($this->getTitle()) . '</h2>' : ''; ?>
+			<?php echo $this->getSubtitle() ? '<p class="sub-title text">' . $this->getSubtitle().'</p>' : ''; ?>
+		</div>
+		<ul class="magictabs" data-ajax ='<?php echo $this->getAjaxCfg() ?>'>
+		<?php $activated = $this->getTabActivated();
+			$limit = $this->getLimit();
+			$single = ($numTabs ==1) ? 'single' : '';
+			foreach ($tabs as $type => $name):
+				$status  = (!$this->getAjax() || $activated ==$type) ? 'loaded' : '';
+				$status .= ($type == $activated) ? " activated $single" : '';
+				/* @escapeNotVerified */ echo '<li class="item '.$status.'" data-type ="'.$type.'"><span class ="title">'.__($name).'</span></li>';
+			endforeach;
+		?>
+		</ul>
+    </div>
+<?php endif ?>
+	<div class="ajax_loading" style="display:none" data-url="<?php /* @escapeNotVerified */ echo $this->getUrl('magicproduct/index/product', array('_secure'=>$this->getRequest()->isSecure()))?>"></div>
+	<div class="content-products" 
+	<?php foreach ($this->getFrontendCfg() as $opt) :?>
+		data-<?php /* @escapeNotVerified */ echo $opt ?>='<?php /* @escapeNotVerified */ echo $this->getData($opt) ?>'
+		data-lazyLoad='progressive'
+	<?php endforeach;?>        
+	>
+	<?php echo $this->getContent('product/grid.phtml');	?>
+	</div>
+	<?php if($this->getData('loadmore')): ?>
+		<div class="action-more" style="display: none;">
+	        <span class="load-more" data-loading="<?php echo __('Loading...') ?>" data-loaded="<?php echo __('Loaded') ?>"><?php echo __('Load more') ?></span>
+	        <span class="load-end"><?php echo __('Load end') ?></span>
+	    </div>
+    <?php endif ?>
+</div>

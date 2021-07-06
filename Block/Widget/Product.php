@@ -61,7 +61,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
     public function getCacheKeyInfo()
     {
         $keyInfo     =  parent::getCacheKeyInfo();
-        $keyInfo[]   =  $this->getMagicproduct()->getId();
+        if($this->getMagicproduct()) $keyInfo[] = $this->getMagicproduct()->getId();
         return $keyInfo;
     }
 
