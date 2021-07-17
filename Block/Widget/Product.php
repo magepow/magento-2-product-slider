@@ -61,7 +61,8 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
     public function getCacheKeyInfo()
     {
         $keyInfo     =  parent::getCacheKeyInfo();
-        if($this->getMagicproduct()) $keyInfo[] = $this->getMagicproduct()->getId();
+        $currencyCode = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
+        if($this->getMagicproduct()) $keyInfo[] = $this->getMagicproduct()->getId() . '_' . $currencyCode;
         return $keyInfo;
     }
 
@@ -70,7 +71,8 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
      */
     public function getIdentities()
     {
-        return [self::DEFAULT_CACHE_TAG, self::DEFAULT_CACHE_TAG . '_' . $this->getMagicproduct()->getId()];
+        $currencyCode = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
+        return [ self::DEFAULT_CACHE_TAG, self::DEFAULT_CACHE_TAG . '_' . $this->getMagicproduct()->getId() . '_' . $currencyCode ];
     }
 
     protected function _jnitWidget()
