@@ -292,6 +292,7 @@ define([
 						productsActivated.trigger('contentUpdated');
 						productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
 						productsActivated = productsActivated.find('.products.items');
+						productsActivated.addClass('grid-init');
 						$itemtabs.each(function(){
 							if($(this).data('type') == type) $(this).addClass('loaded');
 						});
