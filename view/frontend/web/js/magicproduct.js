@@ -119,8 +119,10 @@ define([
 							methods.loadMoreButton(nextPage);
 							productsActivated.siblings().removeClass('activated'); //.hide();  // not fadeOut()
 							productsActivated = productsActivated.find('.products.items');
-							if(isGrid) methods.playAnimate(productsActivated); //require for Animate
-							else  methods.productSlider(options, productsActivated);
+							if(isGrid){
+								if(!productsActivated.hasClass('grid-init')) productsActivated.addClass('grid-init');
+								methods.playAnimate(productsActivated); //require for Animate
+							} else  methods.productSlider(options, productsActivated);
 						}
 				});
 				methods.loadMore();
