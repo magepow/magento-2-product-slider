@@ -377,7 +377,12 @@ define([
     $( document ).ready(function($) {
 	    $("*[class^='alo-content-']").each(function() {
 	    	if($(this).hasClass('autoplay')){
-	    		var selector = '.' + $(this).attr('class').trim().replace(/ /g , '.');
+				var selector  = $(this).attr('class').split(" ");
+				selector.forEach(item => {
+					if(item.indexOf('alo-content-') === 0) {
+					    selector = item.replace(/[.]/g, ' ').trim();
+					}
+				});	    		
 	    		$(this).magicproduct({selector: selector}); // don't use $(this)
 	    	}
 	    });
