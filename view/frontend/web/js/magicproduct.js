@@ -380,7 +380,7 @@ define([
 				var selector  = $(this).attr('class').split(" ");
 				selector.forEach(item => {
 					if(item.indexOf('alo-content-') === 0) {
-					    selector = item.replace(/[.]/g, ' ').trim();
+					    selector = '.' + item.replace(/[.]/g, ' ').trim();
 					}
 				});	    		
 	    		$(this).magicproduct({selector: selector}); // don't use $(this)
