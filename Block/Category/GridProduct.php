@@ -133,12 +133,15 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
             );
 
         $categoryId = $this->getTypeFilter();
-        $collection->addCategoriesFilter(['in' => [$categoryId]])
-                ->addAttributeToFilter('entity_id', array('in' => $producIds))
+        if($categoryId){ /* All categoryId = 0 not filter */
+            $collection->addCategoriesFilter(['in' => [$categoryId]]);
+        }
+
+        $collection->addAttributeToFilter('entity_id', array('in' => $producIds))
                 ->groupByAttribute('entity_id')
                 ->addAttributeToSort('qty_ordered', 'desc')
                 ->addStoreFilter()
-                ->setPageSize($this->_limit)->setCurPage(1);
+                ->setPageSize($this->_limit)->setCurPage(1);            
 
         $collection = $this->_addProductAttributesAndPrices(
             $collection
