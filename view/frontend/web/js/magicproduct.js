@@ -309,8 +309,7 @@ define([
 							if($(this).data('type') == type) $(this).addClass('loaded');
 						});
 
-						if(isGrid) methods.playAnimate(productsActivated); //require for Animate
-						else  methods.productSlider(options, productsActivated);
+						if(!isGrid) methods.productSlider(options, productsActivated);
 						if($.fn.timer !== undefined){
 							var countdown = productsActivated.find('.alo-count-down');
 							if(countdown.lenght){
@@ -321,38 +320,9 @@ define([
 								});
 							}
 						}
-						if($.fn.mage !== undefined){
-							// $.mage.catalogAddToCart;
-							// $.mage.apply;
-				        	// $('.action.tocart' ).unbind( "click" ).click(function() { // Callback Ajax Add to Cart
-					        // 	var form = $(this).closest('form');
-		            		// 	var widget = form.catalogAddToCart({ bindSubmit: false });
-					        //     widget.catalogAddToCart('submitForm', form);
-					        //     return false;
-				        	// });
-						}
 					}
 				});
-            }, 
-
-			// Effect
-			playAnimate : function(cnt) {
-				// var parent = cnt.parent();
-				// $('.products-grid', parent).removeClass("play");
-				// $('.products-grid .item', parent).removeAttr('style');
-				// var animate = cnt;
-				// var  time = time || 300; // if(typeof time == 'undefined') {time =300}
-				// var $_items = $('.item-animate', animate);
-				// $_items.each(function(i){
-				// 	$(this).attr("style", "-webkit-animation-delay:" + i * time + "ms;"
-				// 		                + "-moz-animation-delay:" + i * time + "ms;"
-				// 		                + "-o-animation-delay:" + i * time + "ms;"
-				// 		                + "animation-delay:" + i * time + "ms;");
-				// 	if (i == $_items.size() -1){
-				// 		$('.products-grid', animate).addClass("play");  // require for Animate
-				// 	}
-				// });
-			},
+            },
 
             disableLoadmoreButton: function () {
                 var loadmoreButton = actionmore.find(settings.loadmoreSelector);
@@ -374,9 +344,9 @@ define([
 
         };
 
-        if (methods[options]) { // $("#element").pluginName('methodName', 'arg1', 'arg2');
+        if (methods[options]) {
             return methods[options].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof options === 'object' || !options) { // $("#element").pluginName({ option: 1, option:2 });
+        } else if (typeof options === 'object' || !options) {
             return methods.init.apply(this);
         } else {
             $.error('Method "' + method + '" does not exist in magiccart plugin!');
