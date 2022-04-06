@@ -70,43 +70,15 @@ define([
 					products.css('zIndex', zIndex);
 				});
 				// end over tab
-				$itemtabs.each(function() {
-					var $this = $(this);
-					var type = $this.data('type');
-					var typeClass = '.mc-'+type;
-					if($this.hasClass('activated')){
-						var productsActivated = $product.find(typeClass).addClass('activated');
-						if ("IntersectionObserver" in window) {
-							var style 	= methods.getStyleCLS(options);
-							var styleId = selector.replace(/[.]/g, '_');
-							$head.append('<style type="text/css" id="' + styleId +  '" >'+style+'</style>');
-							let productsObserver = new IntersectionObserver(function(entries, observer) {
-								entries.forEach(function(entry) {
-									if (entry.isIntersecting) {
-										// let el = entry.target;
-						                $head.find('#' + styleId).remove();
-										methods.gridSlider(productsActivated);
-										productsObserver.unobserve(entry.target);
-									}
-								});
-							});
-						    productsActivated.each(function(){
-						    	productsObserver.observe(this);
-						    });
-						} else {
-							methods.gridSlider(productsActivated);
-						}
-					}
-				});
 
 				$tabs.on("click", '.item', function(){
-						var $this = $(this);
-						var type = $this.data('type');
+						var tab = $(this);
+						var type = tab.data('type');
 						var typeClass = '.mc-'+type;
-						if($this.hasClass('activated')) return;
+						if(tab.hasClass('activated')) return;
 						$itemtabs.removeClass('activated');
-						$this.addClass('activated');
-						if(! $this.hasClass('loaded')){
+						tab.addClass('activated');
+						if(!tab.hasClass('loaded')){
 							if(type == undefined) return;
 							methods.sendAjax(type, infotabs);
 						} else {
@@ -125,7 +97,45 @@ define([
 							} else  methods.productSlider(options, productsActivated);
 						}
 				});
+
+				$itemtabs.each(function() {
+					var tab = $(this);
+					var typeClass = '.mc-'+ tab.data('type');
+					if(tab.hasClass('activated')){
+						var productsActivated = $product.find(typeClass).addClass('activated');
+						if ("IntersectionObserver" in window) {
+							var style 	= methods.getStyleCLS(options);
+							var styleId = selector.replace(/[.]/g, '_');
+							$head.append('<style type="text/css" id="' + styleId +  '" >'+style+'</style>');
+							let productsObserver = new IntersectionObserver(function(entries, observer) {
+								entries.forEach(function(entry) {
+									if (entry.isIntersecting) {
+										// let el = entry.target;
+						                $head.find('#' + styleId).remove();
+										methods.actionLoad(tab, productsActivated);
+										productsObserver.unobserve(entry.target);
+									}
+								});
+							});
+						    productsActivated.each(function(){
+						    	productsObserver.observe(this);									
+						    });
+						} else {
+							methods.actionLoad(tab, productsActivated);
+						}
+					}
+				});
+
 				methods.loadMore();
+            },
+
+            actionLoad: function(tab, productsActivated) {
+            	if(tab.data('type') == 'random'){
+					tab.removeClass('loaded activated').trigger('click');
+					productsActivated.find('.products.items').html('');            		
+            	} else {
+            		methods.gridSlider(productsActivated);	
+            	}
             },
 
             getStyleCLS : function (options) {
