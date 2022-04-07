@@ -20,11 +20,19 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Catalog\Block\Product\AbstractProduct;
 
-class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
+class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
 {
 
     protected $_limit; // Limit Product
     protected $_types; // types is types filter bestseller, featured ...
+
+    /**
+     * Product collection factory
+     *
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     */
+    protected $_productCollectionFactory;
+
     /**
      * Product collection factory
      *
@@ -40,6 +48,7 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Framework\Data\Helper\PostHelper $postDataHelper,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         CategoryRepositoryInterface $categoryRepository,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
@@ -47,6 +56,7 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
         \Magiccart\Magicproduct\Model\Magicproduct $magicproduct,
         array $data = []
     ) {
+        $this->_productCollectionFactory = $productCollectionFactory;
         $this->_ruleFactory = $ruleFactory;
         $this->sqlBuilder   = $sqlBuilder;
         $this->_magicproduct = $magicproduct;
@@ -94,7 +104,15 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
 
         if (is_null($this->_productCollection)) {
             $this->setCategoryId($this->getTypeFilter());
-            $this->_productCollection = parent::_getProductCollection();   
+            /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $collection */
+            $collection = $this->_productCollectionFactory->create();
+            $collection->addCategoriesFilter(['in' => $this->getTypeFilter()]);
+            $this->_catalogLayer->prepareProductCollection($collection);
+            $collection = $this->_addProductAttributesAndPrices(
+                $collection
+            );
+            $collection->addStoreFilter();
+            $this->_productCollection = $collection;
         }
 
         $this->_limit = (int) $this->getWidgetCfg('limit');

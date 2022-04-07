@@ -130,7 +130,12 @@ define([
             },
 
             actionLoad: function(tab, productsActivated) {
-            	if(tab.data('type') == 'random'){
+            	var isRandom = (tab.data('type') == 'random');
+            	if(!isRandom){
+	            	var ajax =  tab.closest('.magictabs').data('ajax');
+	            	isRandom = (ajax.hasOwnProperty('types') && ajax.types == 'random');            		
+            	}
+            	if(isRandom){
 					tab.removeClass('loaded activated').trigger('click');
 					productsActivated.find('.products.items').html('');            		
             	} else {
