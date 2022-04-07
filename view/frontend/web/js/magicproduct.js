@@ -299,7 +299,12 @@ define([
 						if(productsActivated.length){
 							var productsActivated = $content.find(product).find(typeClass).addClass('activated');
 							productsActivated.data('next-page', nextPage);
-							productsActivated.find('.products.items').append(productMore.find('.products.items').html());
+							var items = productsActivated.find('.products.items');
+							if(items.length){
+								items.append(productMore.find('.products.items').html());
+							} else {
+								productsActivated.html(productMore.html());
+							}
 							nextPage++; // nextPage + 1 is ajax.
 							methods.enableLoadmoreButton(actionmore);
 						} else {
