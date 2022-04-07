@@ -20,7 +20,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Catalog\Block\Product\AbstractProduct;
 
-class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
+class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
 {
 
     protected $_limit; // Limit Product
@@ -48,8 +48,8 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Framework\Data\Helper\PostHelper $postDataHelper,
         \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         CategoryRepositoryInterface $categoryRepository,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\Url\Helper\Data $urlHelper,
         \Magento\CatalogWidget\Model\RuleFactory $ruleFactory,
         \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
@@ -104,15 +104,7 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
 
         if (is_null($this->_productCollection)) {
             $this->setCategoryId($this->getTypeFilter());
-            /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $collection */
-            $collection = $this->_productCollectionFactory->create();
-            $collection->addCategoriesFilter(['in' => $this->getTypeFilter()]);
-            $this->_catalogLayer->prepareProductCollection($collection);
-            $collection = $this->_addProductAttributesAndPrices(
-                $collection
-            );
-            $collection->addStoreFilter();
-            $this->_productCollection = $collection;
+            $this->_productCollection = parent::_getProductCollection();   
         }
 
         $this->_limit = (int) $this->getWidgetCfg('limit');
@@ -142,10 +134,12 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
 
     public function getBestseller($collection){
 
-        $producIds = $collection->getAllIds();
+        $producIds = [];
+        foreach ($collection as $product) {
+            $producIds[] = $product->getId();
+        }
 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $collection = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+        $collection = $this->_productCollectionFactory->create();
         $collection->joinField(
                 'qty_ordered', 'sales_bestsellers_aggregated_yearly', 'qty_ordered', 'product_id=entity_id', null, 'inner'
             );
@@ -155,7 +149,7 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
             $collection->addCategoriesFilter(['in' => [$categoryId]]);
         }
 
-        $collection->addAttributeToFilter('entity_id', array('in' => $producIds))
+        $collection->addAttributeToFilter('entity_id', ['in' => $producIds])
                 ->groupByAttribute('entity_id')
                 ->addAttributeToSort('qty_ordered', 'desc')
                 ->addStoreFilter()
@@ -185,22 +179,6 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
 
         return $collection;
 
-    }
-
-    public function getMostviewed($collection){
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $report = $objectManager->get('\Magento\Reports\Model\ResourceModel\Report\Product\Viewed\CollectionFactory')->create();
-        $ids = $collection->getAllIds();
-        $report->addFieldToFilter('product_id', array('in' => $ids))->setPageSize($this->_limit)->setCurPage(1);
-        $producIds = array();
-        foreach ($report as $product) {
-            $producIds[] = $product->getProductId();
-        }
-
-        $collection->addAttributeToFilter('entity_id', array('in' => $producIds));
-    
-        return $collection;
     }
 
     public function getNew($collection) {
@@ -238,9 +216,16 @@ class GridProduct extends \Magento\Catalog\Block\Product\ListProduct
 
     public function getRandom($collection) {
 
+        $producIds = [];
+        foreach ($collection as $product) {
+            $producIds[] = $product->getId();
+        }
+        $collection = $this->_productCollectionFactory->create();
+        $collection = $collection->addAttributeToSelect('*')
+                    ->addAttributeToFilter('entity_id', ['in' => $producIds]);
         $collection->getSelect()->order('rand()');
-        return $collection;
 
+        return $collection;
     }
 
     public function getRecently($collection) {
