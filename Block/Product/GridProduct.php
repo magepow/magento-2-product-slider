@@ -483,4 +483,14 @@ $collection->joinField(
         return $category;
     }
 
+    public function getPositioned()
+	{
+        $positioned = parent::getPositioned();
+        if($positioned == NULL){
+            return '';
+        }else{
+            return $positioned;
+        }
+
+	}
 }
