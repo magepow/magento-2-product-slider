@@ -93,6 +93,17 @@ class GridProduct extends \Magiccart\Magicproduct\Block\Product\ListProduct
         }
     }
 
+    public function getPositioned()
+	{
+        $positioned = parent::getPositioned();
+        if(parent::getPositioned() == NULL){
+            return '';
+        }else{
+            return $positioned;
+        }
+
+	}
+
     protected function _getProductCollection()
     {
 
