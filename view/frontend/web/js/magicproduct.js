@@ -135,11 +135,10 @@ define([
 	            	var ajax =  tab.closest('.magictabs').data('ajax');
 	            	isRandom = (ajax.hasOwnProperty('types') && ajax.types == 'random');            		
             	}
+            	methods.gridSlider(productsActivated);
             	if(isRandom){
 					tab.removeClass('loaded activated').trigger('click');
 					productsActivated.find('.products.items').html('');            		
-            	} else {
-            		methods.gridSlider(productsActivated);	
             	}
             },
 
