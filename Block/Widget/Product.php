@@ -192,7 +192,7 @@ class Product extends \Magento\Framework\View\Element\Template implements \Magen
 
     public function getAjaxCfg()
     {
-        if(!$this->getAjax()) return 0;
+        // if(!$this->getAjax()) return 0;
         $ajax = array();
         foreach ($this->_options as $option) {
             $ajax[$option] = $this->getData($option);
