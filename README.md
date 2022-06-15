@@ -96,7 +96,7 @@ Basically, this extension allows you to unlimitedly integrate product sliders in
 ## How to use Magic Product Slider extension for Magento 2
 ### How to install Product Slider
 
- #### 1. Buy it
+## 1. Buy it
   [Buy it on Magepow](https://magepow.com/magento-2-product-slider.html)
 
 ## Magiccart Magicproduct user guide
