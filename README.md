@@ -1,3 +1,5 @@
+[<img src="https://github.com/magepow/themeforest/blob/master/shopify/shopify_affiliate.jpg" >](https://shopify.pxf.io/VyL446)
+
 ## Magento 2 Product Slider Free - Magic product slider extension by Magepow
 **Magento 2 Product Slider** is an important module that helps you to display product lists as sliders on any live store page like page Homepage, category page, product page, payment page ... you want. 
 
